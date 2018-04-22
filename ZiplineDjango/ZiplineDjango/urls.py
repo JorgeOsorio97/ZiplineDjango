@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf.urls import url
-
+from ZiplineDjango import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^show_indicators', include("ShowIndicators.urls")),
+    re_path(r'^', views.index, name='index'),
 ]

@@ -18,6 +18,7 @@ from django.urls import path, re_path
 from ShowIndicators import views
 from django.conf.urls import url
 
+app_name = 'ShowIndicators'
 
 urlpatterns = [
     url(r'^', views.index, name='index'),
