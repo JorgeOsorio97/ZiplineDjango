@@ -21,6 +21,6 @@ from ZiplineDjango import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^show_indicators', include("ShowIndicators.urls")),
-    re_path(r'^', views.index, name='index'),
+    re_path(r'^show_indicators/', include("ShowIndicators.urls")),
+    path('', views.index, name='index'),
 ]

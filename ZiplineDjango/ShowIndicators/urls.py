@@ -21,5 +21,6 @@ from django.conf.urls import url
 app_name = 'ShowIndicators'
 
 urlpatterns = [
-    url(r'^', views.index, name='index'),
+    re_path(r'^get-data/$', views.getData, name='get-data'),
+    path('', views.index, name='index'),
 ]

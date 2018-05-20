@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,5 +8,49 @@
 </head>
 <body>
     <h1>Prueba views</h1>
+
+    <form id="getData" method="GET" onsubmit="return false">
+    {% csrf_token %}
+    {{ form.as_p }}
+        <select id="security">
+            <option value="aeromex">AEROMEX</option>
+            <option value="ahmsa">AHMSA</option>
+            <option value="americaMovil">AmericaMovil</option>
+            <option value="arcaContinental">ArcaContinental-AC</option>
+            <option value="bachoco">BACHOCO</option>
+            <option value="bancoSantander">BancoSANTANDER</option>
+            <option value="bimbo">BIMBO</option>
+            <option value="bmv">BMV</option>
+            <option value="cablevision">Cablevision</option>
+            <option value="casaSaba">Casa SABA</option>
+            <option value="cemex">CEMEX</option>
+            <option value="chedrahui">CHEDRAUI</option>
+            <option value="cocacola">Coca-Cola</option>
+            <option value="consorcioAra">Consorcio ARA</option>
+            <option value="elektra">ELEKTRA</option>
+            <option value="finamex">FINAMEX</option>
+            <option value="firstMajesticSolveCorpFmsc">FirstMajesticSolverCorp-FMSC</option>
+            <option value="gennomaLab">GENNOMA-LAB</option>
+            <option value="gnp">GrupoNacionalProvincial-GNP</option>
+            <option value="grupoSports">GrupoSports</option>
+            <option value="liverpool">LIVERPOOL</option>
+            <option value="radioCentro">RadioCENTRO</option>
+            <option value="rotoplas">ROTOPLAS</option>
+            <option value="soriana">SORIANA</option>
+            <option value="televisa">TELEVISA</option>
+            <option value="walmart">WAL-MART</option>
+
+        </select>
+        <button id="enviar">Enviar</button>
+    </form>
+    
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+    <script src="{% static "show_indicators/get-data.js" %}"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 from requests import request
 import numpy as np
-import pandas
+import pandas as pd
 
 def intrinio_security():
     api_username = '8993a7d350ddc80795097189caecf28b'
@@ -11,7 +11,7 @@ def intrinio_security():
 
     request_url = base_url + '/historical_data'
     q_params = {
-        'identifier' '',
+        'identifier': '1',
         'item': 'close_price',
         'start_date': '2007-01-01',
         'end_date': '2018-06-04',   
@@ -39,5 +39,5 @@ def intrinio_security():
 
 def call_csv():
     df = pd.read_csv('appl.csv')
-    df = df.to_dict()
+    df = df.to_dict()   
     return df 
