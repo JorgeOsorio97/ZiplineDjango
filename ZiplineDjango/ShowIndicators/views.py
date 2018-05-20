@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
+from ShowIndicators import indicadores
+import csv
+import io
 
 # Create your views here.
 def index(request):
@@ -25,5 +28,14 @@ def getData(request):
                     'soriana' : 'SORIANA.csv', 'televisa' : 'TELEVISA.csv', 'walmart' : 'WAL-MART.csv'} 
     req_url = request.GET.get('url')
     print(req_url)
-    fileUrl = 'static/show_indicators/historicos/result.csv'
-    return JsonResponse({'URL' : fileUrl}) 
+    print(securities_dict[req_url])
+    indicadores.prom_mov_short('static/show_indicators/historicos/'+securities_dict[req_url])
+    indicadores.prom_mov_long('static/show_indicators/historicos/'+securities_dict[req_url])
+    fileUrl = 'result.csv'  
+    return JsonResponse({'URL' : fileUrl})
+
+def result(request):
+    with open('ShowIndicators/result.csv', 'rb') as myfile:
+        response = HttpResponse(myfile, content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=result.csv'
+        return response

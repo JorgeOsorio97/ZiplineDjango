@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Show Indicator</title>
+    <title>Visor de Acciones</title>
 </head>
 <body>
-    <h1>Prueba views</h1>
+    <h1>Visor de Acciones</h1>
 
     <form id="getData" method="GET" onsubmit="return false">
     {% csrf_token %}
@@ -39,18 +39,21 @@
             <option value="soriana">SORIANA</option>
             <option value="televisa">TELEVISA</option>
             <option value="walmart">WAL-MART</option>
+            
+            
 
         </select>
         <button id="enviar">Enviar</button>
     </form>
     
-
+    <div id="myDiv" style="width:600; height:800"></div> 
 
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{% static "show_indicators/get-data.js" %}"></script>
 </body>
 </html>

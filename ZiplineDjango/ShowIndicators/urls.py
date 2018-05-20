@@ -22,5 +22,6 @@ app_name = 'ShowIndicators'
 
 urlpatterns = [
     re_path(r'^get-data/$', views.getData, name='get-data'),
+    re_path(r'^result/$', views.result, name='result'),
     path('', views.index, name='index'),
 ]
