@@ -25,6 +25,5 @@ def getData(request):
                     'soriana' : 'SORIANA.csv', 'televisa' : 'TELEVISA.csv', 'walmart' : 'WAL-MART.csv'} 
     req_url = request.GET.get('url')
     print(req_url)
-
-    fileUrl = 'static/show_indicators/historicos/{}'.format(securities_dict[req_url])
+    fileUrl = 'static/show_indicators/historicos/result.csv'
     return JsonResponse({'URL' : fileUrl}) 

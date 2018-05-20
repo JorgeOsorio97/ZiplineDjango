@@ -7,9 +7,9 @@ def corregir_fecha():
         sus = [] 
         data = pd.read_csv(w)
         for x in data['FECHA']:
-            y = '{}-{}-{}'.format(x[6:],x[3:5],x[0:2])
+            y = '{0}-{2}-{1}'.format(x[6:],x[3:5],x[0:2])
             print(x)
-            print(y)
+            print(y)    
             sus.append(y)
         data['FECHA'] = sus
         data.to_csv(w, index = False)
