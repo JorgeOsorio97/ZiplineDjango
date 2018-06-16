@@ -5,47 +5,53 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Visor de Acciones</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Visor de Acciones</h1>
 
-    <form id="getData" method="GET" onsubmit="return false">
-    {% csrf_token %}
-    {{ form.as_p }}
-        <select id="security">
-            <option value="aeromex">AEROMEX</option>
-            <option value="ahmsa">AHMSA</option>
-            <option value="americaMovil">AmericaMovil</option>
-            <option value="arcaContinental">ArcaContinental-AC</option>
-            <option value="bachoco">BACHOCO</option>
-            <option value="bancoSantander">BancoSANTANDER</option>
-            <option value="bimbo">BIMBO</option>
-            <option value="bmv">BMV</option>
-            <option value="cablevision">Cablevision</option>
-            <option value="casaSaba">Casa SABA</option>
-            <option value="cemex">CEMEX</option>
-            <option value="chedrahui">CHEDRAUI</option>
-            <option value="cocacola">Coca-Cola</option>
-            <option value="consorcioAra">Consorcio ARA</option>
-            <option value="elektra">ELEKTRA</option>
-            <option value="finamex">FINAMEX</option>
-            <option value="firstMajesticSolveCorpFmsc">FirstMajesticSolverCorp-FMSC</option>
-            <option value="gennomaLab">GENNOMA-LAB</option>
-            <option value="gnp">GrupoNacionalProvincial-GNP</option>
-            <option value="grupoSports">GrupoSports</option>
-            <option value="liverpool">LIVERPOOL</option>
-            <option value="radioCentro">RadioCENTRO</option>
-            <option value="rotoplas">ROTOPLAS</option>
-            <option value="soriana">SORIANA</option>
-            <option value="televisa">TELEVISA</option>
-            <option value="walmart">WAL-MART</option>
-            
-            
+    <div class="jumbotron">
+        <h1 class="display-4">Visor de Acciones</h1>
 
-        </select>
-        <button id="enviar">Enviar</button>
-    </form>
-    
+        <form id="getData" method="GET" onsubmit="return false">
+        <div class="form-group">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <select class="form-control" id="security">
+                <option value="aeromex">AEROMEX</option>
+                <option value="ahmsa">AHMSA</option>
+                <option value="americaMovil">AmericaMovil</option>
+                <option value="arcaContinental">ArcaContinental-AC</option>
+                <option value="bachoco">BACHOCO</option>
+                <option value="bancoSantander">BancoSANTANDER</option>
+                <option value="bimbo">BIMBO</option>
+                <option value="bmv">BMV</option>
+                <option value="cablevision">Cablevision</option>
+                <option value="casaSaba">Casa SABA</option>
+                <option value="cemex">CEMEX</option>
+                <option value="chedrahui">CHEDRAUI</option>
+                <option value="cocacola">Coca-Cola</option>
+                <option value="consorcioAra">Consorcio ARA</option>
+                <option value="elektra">ELEKTRA</option>
+                <option value="finamex">FINAMEX</option>
+                <option value="firstMajesticSolveCorpFmsc">FirstMajesticSolverCorp-FMSC</option>
+                <option value="gennomaLab">GENNOMA-LAB</option>
+                <option value="gnp">GrupoNacionalProvincial-GNP</option>
+                <option value="grupoSports">GrupoSports</option>
+                <option value="liverpool">LIVERPOOL</option>
+                <option value="radioCentro">RadioCENTRO</option>
+                <option value="rotoplas">ROTOPLAS</option>
+                <option value="soriana">SORIANA</option>
+                <option value="televisa">TELEVISA</option>
+                <option value="walmart">WAL-MART</option>
+                
+                
+
+            </select>
+        
+            <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+        </div>
+        </form>
+    </div>
     <div id="myDiv" style="width:600; height:800"></div> 
 
 
@@ -55,5 +61,6 @@
     crossorigin="anonymous"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{% static "show_indicators/get-data.js" %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

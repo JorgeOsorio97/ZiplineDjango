@@ -30,7 +30,7 @@ def getData(request):
     print(req_url)
     print(securities_dict[req_url])
     indicadores.prom_mov_short('static/show_indicators/historicos/'+securities_dict[req_url])
-    indicadores.prom_mov_long('static/show_indicators/historicos/'+securities_dict[req_url])
+    indicadores.prom_mov_long('result.csv')
     fileUrl = 'result.csv'  
     return JsonResponse({'URL' : fileUrl})
 
