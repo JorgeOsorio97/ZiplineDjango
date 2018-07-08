@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 from ShowIndicators import indicadores
 import csv
 import io
+import pandas as pd
 
 # Create your views here.
 def index(request):
@@ -29,6 +30,7 @@ def getData(request):
     req_url = request.GET.get('url')
     print(req_url)
     print(securities_dict[req_url])
+    symbol = pd.read_csv()
     indicadores.prom_mov_short('static/show_indicators/historicos/'+securities_dict[req_url])
     indicadores.prom_mov_long('ShowIndicators/result.csv')
     fileUrl = 'result.csv'  
@@ -39,3 +41,4 @@ def result(request):
         response = HttpResponse(myfile, content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename=result.csv'
         return response
+

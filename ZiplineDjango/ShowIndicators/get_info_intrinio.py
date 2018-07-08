@@ -26,7 +26,7 @@ def intrinio_security():
 
     cols = ['Date','Open', 'High', 'Low', 'Close', 'Volume']
 
-    df = pd.DataFrame(cols = cols,)
+    df = pd.DataFrame(cols = cols)
 
     for x in np.arange(n_pages):
 
