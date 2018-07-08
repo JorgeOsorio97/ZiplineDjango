@@ -24,8 +24,8 @@ function plotData(dir,name) {
             type: "scatter",    
             mode: "lines",
             name: 'High',
-            x: unpack(rows, 'FECHA'),
-            y: unpack(rows, 'MAXIMO'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'High'),
             line: { color: '#17BECF' }
         }
 
@@ -33,26 +33,26 @@ function plotData(dir,name) {
             type: "scatter",
             mode: "lines",
             name: 'Low',
-            x: unpack(rows, 'FECHA'),
-            y: unpack(rows, 'MINIMO'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'Low'),
             line: { color: '#7F7F7F' }
         }
         var trace3 = {
             type: "scatter",
             mode: "lines+markets",
             name: 'ProMovShort',
-            x: unpack(rows, 'FECHA'),
-            y: unpack(rows, 'ProMovShort'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SMA-50_data'),
             line: { color: '#2eb82e' },
-            marker: { color: '#2eb82e', size: 4 }
+            marker: { color: 'j#2eb82e', size: 4 }
         }
 
         var trace4 = {
             type: "scatter",
             mode: "lines+markers",
             name: 'ProMovLong',
-            x: unpack(rows, 'FECHA'),
-            y: unpack(rows, 'ProMovLong'),
+            x: unpack(rows, 'Date'),
+            y: unpack(rows, 'SMA-20_data'),
             line: { color: '#ff0000' },
             connectgaps: true
         };
@@ -86,5 +86,7 @@ function plotData(dir,name) {
         };
 
         Plotly.newPlot('myDiv', data, layout);
+        console.log('DONE');
+        
     })
 }

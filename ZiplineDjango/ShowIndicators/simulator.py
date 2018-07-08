@@ -50,9 +50,10 @@ class Simulator:
         elif self.std_purchase is not None:
             return "std_purchase"
 
-    def add_indicator(self, name:str, decision = []):
-        if len(self.security['Close']) == len(decision):
-            self.security[name] = decision
+    def add_indicator(self, name:str, decision = {}):
+        if len(self.security['Close']) == len(decision['data']):
+            self.security[name + "_decision"] = decision['decision']
+            self.security[name + "_data"] = decision['data']
             self.indicators_names.append(name)
         else:
             print('el tamaño de tu decision es incorrecto')

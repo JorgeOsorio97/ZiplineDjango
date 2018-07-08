@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-from ShowIndicators import indicadores
+from ShowIndicators import indicators,simulator
 import csv
 import io
 import pandas as pd
@@ -30,11 +30,15 @@ def getData(request):
     req_url = request.GET.get('url')
     print(req_url)
     print(securities_dict[req_url])
-    symbol = pd.read_csv()
-    indicadores.prom_mov_short('static/show_indicators/historicos/'+securities_dict[req_url])
-    indicadores.prom_mov_long('ShowIndicators/result.csv')
-    fileUrl = 'result.csv'  
-    return JsonResponse({'URL' : fileUrl})
+    symbol = pd.read_csv('static/show_indicators/historicos/'+securities_dict[req_url])
+    sim  = simulator.Simulator(symbol,std_purchase = 20)
+    sim.add_indicator('SMA-50',indicators.SMAdecision(symbol,50))
+    sim.add_indicator('SMA-20',indicators.SMAdecision(symbol,20))
+    sim.security.to_csv('ShowIndicators/result.csv')
+    fileUrl = 'result.csv'
+    print(sim.security.head())
+    return JsonResponse({'URL' : fileUrl,
+                        'indicators':[]})   
 
 def result(request):
     with open('ShowIndicators/result.csv', 'rb') as myfile:

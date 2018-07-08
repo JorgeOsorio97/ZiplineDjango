@@ -113,3 +113,6 @@ def WMAdecision(table, days = 20):
         if data[i] < close[i]:
             decision.append('Buy')  
     return {'decision' :decision, 'data': data}
+
+
+#TODO revisar el csv de aeromex con los del koala en dropbox
