@@ -36,7 +36,7 @@ def getData(request):
     sim.add_indicator('SMA-20',indicators.SMAdecision(symbol,20))
     sim.security.to_csv('ShowIndicators/result.csv')
     fileUrl = 'result.csv'
-    print(sim.security.head())
+    print(sim.security.tail())
     return JsonResponse({'URL' : fileUrl,
                         'indicators':[]})   
 
