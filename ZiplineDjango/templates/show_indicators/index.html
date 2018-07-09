@@ -43,14 +43,23 @@
                 <option value="soriana">SORIANA</option>
                 <option value="televisa">TELEVISA</option>
                 <option value="walmart">WAL-MART</option>
-                
-                
-
+    
             </select>
         
-            <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+            
         </div>
         </form>
+        <form action="indicators" method="POST"></form>
+        <div class="form-group">
+            EMA <input type="checkbox" value="EMA", name="indi" class="indicator" checked="yes"><br>
+            SMA <input type="checkbox" value="SMA", name="indi" class="indicator"><br>
+            SAR <input type="checkbox" value="SAR", name="indi" class="indicator"><br>
+            KAMA <input type="checkbox" value="KAMA", name="indi" class="indicator"><br>
+            TEMA <input type="checkbox" value="TEMA", name="indi" class="indicator"><br>
+            TRIMA <input type="checkbox" value="TRIMA", name="indi" class="indicator"><br>
+            WMA <input type="checkbox" value="WMA", name="indi" class="indicator"><br>
+        </div>
+        <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
     </div>
     <div id="myDiv" style="width:600; height:800"></div> 
 

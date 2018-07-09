@@ -12,6 +12,30 @@ $('#enviar').click(() => {
         }
     });
 });
+$('#enviar').click(function() {
+    var selected = [];
+    $(":checkbox[name=indi]").each(function() {
+      if (this.checked) {
+        selected.push($(this).val());
+      }
+    });
+    if (selected.length) {
+      $.ajax({
+        cache: false,
+        type: 'post',
+        dataType: 'json', 
+        data: selected, 
+        url: '/show_indicators/pruebaPOST',
+        success: function(data) {
+          alert('datos enviados');
+        }
+      });
+      alert(JSON.stringify(selected));
+    } else
+      alert('Debes seleccionar al menos un indicador.');
+
+    return false;
+  });
 function plotData(dir,name) {
     Plotly.d3.csv(dir, function (err, rows) {   
 
