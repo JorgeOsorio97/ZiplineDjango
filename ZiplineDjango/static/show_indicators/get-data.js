@@ -24,9 +24,9 @@ $('#enviar').click(function() {
         //cache: false,
         type: 'post',
         dataType: 'json', 
-        data: selected, 
+        data:{'security':$('#security').val(),'indicators': selected}, 
         csrfmiddlewaretoken: '{{ csrf_token }}',
-        url: '/show_indicators/pruebaPOST/',
+        url: '/show_indicators/get-data/',
         success: function(data) {
           console.log('datos enviados');
         }

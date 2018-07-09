@@ -6,6 +6,7 @@ import csv
 import io
 import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 def index(request):
@@ -14,6 +15,7 @@ def index(request):
     
     return render(request, 'show_indicators/index.html')
 
+@csrf_exempt
 def getData(request):
     print("si entro")
     securities_dict = {'aeromex' : 'AEROMEX.csv', 'ahmsa' : 'AHMSA.csv',
@@ -28,9 +30,12 @@ def getData(request):
                     'grupoSports' : 'GrupoSports.csv', 'liverpool' : 'LIVERPOOL.csv', 
                     'radioCentro' : 'RadioCENTRO.csv', 'rotoplas' : 'ROTOPLAS.csv', 
                     'soriana' : 'SORIANA.csv', 'televisa' : 'TELEVISA.csv', 'walmart' : 'WAL-MART.csv'} 
-    req_url = request.GET.get('url')
+    print(request.POST)
+    req_url = request.POST['security'] 
+    indicators_req = dict(request.POST.lists())['indicators[]']
     print(req_url)
     print(securities_dict[req_url])
+    print(indicators_req)
     symbol = pd.read_csv('static/show_indicators/historicos/'+securities_dict[req_url])
     sim  = simulator.Simulator(symbol,std_purchase = 20)
     sim.add_indicator('SMA-50',indicators.SMAdecision(symbol,50))

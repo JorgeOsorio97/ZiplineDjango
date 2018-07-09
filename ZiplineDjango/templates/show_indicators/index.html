@@ -11,7 +11,7 @@
 
     <div class="jumbotron">
         <h1 class="display-4">Visor de Acciones</h1>
-        <form action="indicators" method="POST">
+        <form  method="POST">
             {% csrf_token %}
             <div class="form-group">
         
@@ -42,18 +42,30 @@
                 <option value="soriana">SORIANA</option>
                 <option value="televisa">TELEVISA</option>
                 <option value="walmart">WAL-MART</option>
-    
             </select>
         
             
 
-                EMA <input type="checkbox" value="EMA", name="indi" class="indicator" checked="yes"><br>
-                SMA <input type="checkbox" value="SMA", name="indi" class="indicator"><br>
-                SAR <input type="checkbox" value="SAR", name="indi" class="indicator"><br>
-                KAMA <input type="checkbox" value="KAMA", name="indi" class="indicator"><br>
-                TEMA <input type="checkbox" value="TEMA", name="indi" class="indicator"><br>
-                TRIMA <input type="checkbox" value="TRIMA", name="indi" class="indicator"><br>
-                WMA <input type="checkbox" value="WMA", name="indi" class="indicator"><br>
+            <label class="form-check-label" for="EMA">EMA</label>
+            <input type="checkbox" value="EMA", name="indi" class="form-check-input" id="EMA" checked="yes"><br>
+
+            <label class="form-check-label" for="SMA">SMA</label>
+            <input type="checkbox" value="SMA", name="indi" class="form-check-input" id="SMA" ><br>
+
+            <label class="form-check-label" for="SAR">SAR</label>
+            <input type="checkbox" value="SAR", name="indi" class="form-check-input" id="SAR" ><br>
+            
+            <label class="form-check-label" for="KAMA">KAMA</label>
+            <input type="checkbox" value="KAMA", name="indi" class="form-check-input" id="KAMA"><br>
+            
+            <label class="form-check-label" for="TEMA">TEMA</label>
+            <input type="checkbox" value="TEMA", name="indi" class="form-check-input" id="TEMA"><br>
+            
+            <label class="form-check-label" for="TRIMA">TRIMA</label>
+            <input type="checkbox" value="TRIMA", name="indi" class="form-check-input" id="TRIMA"><br>
+            
+            <label class="form-check-label" for="WMA">WMA</label>
+            <input type="checkbox" value="WMA", name="indi" class="form-check-input" id="WMA" ><br>
             
             <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
             </div>
