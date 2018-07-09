@@ -46,3 +46,6 @@ def result(request):
         response['Content-Disposition'] = 'attachment; filename=result.csv'
         return response
 
+def pruebasPost(request):
+    print(request.POST)
+
