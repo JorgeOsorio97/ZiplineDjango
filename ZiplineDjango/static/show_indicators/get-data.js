@@ -28,10 +28,10 @@ $('#enviar').click(function() {
         csrfmiddlewaretoken: '{{ csrf_token }}',
         url: '/show_indicators/pruebaPOST/',
         success: function(data) {
-          alert('datos enviados');
+          console.log('datos enviados');
         }
       });
-      alert(JSON.stringify(selected));
+      console.log(JSON.stringify(selected));
     } else
       alert('Debes seleccionar al menos un indicador.');
 
