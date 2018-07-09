@@ -11,9 +11,9 @@
 
     <div class="jumbotron">
         <h1 class="display-4">Visor de Acciones</h1>
-        <!--
-        <form id="getData" method="GET" onsubmit="return false">
-        <div class="form-group">
+        <form action="indicators" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
         
             <select class="form-control" id="security">
                 <option value="aeromex">AEROMEX</option>
@@ -46,11 +46,7 @@
             </select>
         
             
-        </div>
-        </form> -->
-        <form  method="POST">
-            {% csrf_token %}
-            <div class="form-group">
+
                 EMA <input type="checkbox" value="EMA", name="indi" class="indicator" checked="yes"><br>
                 SMA <input type="checkbox" value="SMA", name="indi" class="indicator"><br>
                 SAR <input type="checkbox" value="SAR", name="indi" class="indicator"><br>
@@ -58,8 +54,9 @@
                 TEMA <input type="checkbox" value="TEMA", name="indi" class="indicator"><br>
                 TRIMA <input type="checkbox" value="TRIMA", name="indi" class="indicator"><br>
                 WMA <input type="checkbox" value="WMA", name="indi" class="indicator"><br>
-            </div>
+            
             <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+            </div>
         </form>
     </div>
 
