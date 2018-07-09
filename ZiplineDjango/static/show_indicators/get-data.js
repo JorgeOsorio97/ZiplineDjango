@@ -1,17 +1,17 @@
 
-$('#enviar').click(() => {
-    console.log('hola');
-    $.ajax({
-        url: '/show_indicators/get-data',
-        data: { 'url': $('#security').val() },
-        dataType: 'json',
-        success: (res) => {
-            console.log('success');
-            console.log(res.URL);
-            plotData('/show_indicators/result',$('#security').val())
-        }
-    });
-});
+// $('#enviar').click(() => {
+//     console.log('hola');
+//     $.ajax({
+//         url: '/show_indicators/get-data',
+//         data: { 'url': $('#security').val() },
+//         dataType: 'json',
+//         success: (res) => {
+//             console.log('success');
+//             console.log(res.URL);
+//             plotData('/show_indicators/result',$('#security').val())
+//         }
+//     });
+// });
 $('#enviar').click(function() {
     var selected = [];
     $(":checkbox[name=indi]").each(function() {
@@ -21,11 +21,12 @@ $('#enviar').click(function() {
     });
     if (selected.length) {
       $.ajax({
-        cache: false,
+        //cache: false,
         type: 'post',
         dataType: 'json', 
         data: selected, 
-        url: '/show_indicators/pruebaPOST',
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        url: '/show_indicators/pruebaPOST/',
         success: function(data) {
           alert('datos enviados');
         }
@@ -36,6 +37,7 @@ $('#enviar').click(function() {
 
     return false;
   });
+
 function plotData(dir,name) {
     Plotly.d3.csv(dir, function (err, rows) {   
 

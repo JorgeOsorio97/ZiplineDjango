@@ -5,6 +5,7 @@ from ShowIndicators import indicators,simulator
 import csv
 import io
 import pandas as pd
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(request):
@@ -46,6 +47,8 @@ def result(request):
         response['Content-Disposition'] = 'attachment; filename=result.csv'
         return response
 
+@csrf_exempt
 def pruebasPost(request):
     print(request.POST)
+    return JsonResponse({'succes': True})
 
