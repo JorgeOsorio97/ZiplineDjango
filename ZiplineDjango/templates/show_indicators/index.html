@@ -45,16 +45,26 @@
     
             </select>
         
-            
+    
+                EMA <input type="checkbox" value="EMA", name="indi" class="EMA"><br>
+                SMA <input type="checkbox" value="SMA", name="indi" class="SMA"><br>
+                SAR <input type="checkbox" value="SAR", name="indi" class="SAR"><br>
+                KAMA <input type="checkbox" value="KAMA", name="indi" class="KAMA"><br>
+                TEMA <input type="checkbox" value="TEMA", name="indi" class="TEMA"><br>
+                TRIMA <input type="checkbox" value="TRIMA", name="indi" class="TRIMA"><br>
+                WMA <input type="checkbox" value="WMA", name="indi" class="WMA"><br>
+                <div id="days" style="display: none;">
+                    Ingrese el numero de dias: <input type="number" name="dias" min="10" value="20"/> <br>
+                    <button type="reset">Reiniciar</button> <br> 
+                </div>
+                <div id="sar" style="display: none;">    
+                    Ingrese la aceleración:  <input type="number" name="acceleration" min="0.02" value="0.02" step="0.01"/> <br>
+                    Ingrese el MAX: <input type="number" name="max" min="0.2" value="0.2" step="0.1"/> <br>
+                    <button type="reset">Reiniciar</button> <br>    
+                </div>
 
-                EMA <input type="checkbox" value="EMA", name="indi" class="indicator" checked="yes"><br>
-                SMA <input type="checkbox" value="SMA", name="indi" class="indicator"><br>
-                SAR <input type="checkbox" value="SAR", name="indi" class="indicator"><br>
-                KAMA <input type="checkbox" value="KAMA", name="indi" class="indicator"><br>
-                TEMA <input type="checkbox" value="TEMA", name="indi" class="indicator"><br>
-                TRIMA <input type="checkbox" value="TRIMA", name="indi" class="indicator"><br>
-                WMA <input type="checkbox" value="WMA", name="indi" class="indicator"><br>
-            
+
+
             <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
             </div>
         </form>
@@ -67,6 +77,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{% static "show_indicators/get-data.js" %}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

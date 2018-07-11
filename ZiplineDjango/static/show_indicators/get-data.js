@@ -12,6 +12,83 @@
 //         }
 //     });
 // });
+$(function(){
+	$('.EMA').change(function(){
+  	if(!$(this).prop('checked')){
+    	$('#days').hide();
+    }else{
+        $('#days').show();
+    }
+  
+  })
+
+})
+$(function(){
+	$('.SMA').change(function(){
+  	if(!$(this).prop('checked')){
+    	$('#days').hide();
+    }else{
+        $('#days').show();
+    }
+  
+  })
+
+})
+$(function(){
+	$('.SAR').change(function(){
+  	if(!$(this).prop('checked')){
+    	$('#sar').hide();
+    }else{
+        $('#sar').show();
+    }
+  
+  })
+
+})
+$(function(){
+	$('.KAMA').change(function(){
+  	if(!$(this).prop('checked')){
+    	$('#days').hide();
+    }else{
+        $('#days').show();
+    }
+  
+  })
+
+})
+$(function(){
+	$('.TEMA').change(function(){
+  	if(!$(this).prop('checked')){
+    	$('#days').hide();
+    }else{
+        $('#days').show();
+    }
+  
+  })
+
+})
+$(function(){
+	$('.TRIMA').change(function(){
+  	if(!$(this).prop('checked')){
+    	$('#days').hide();
+    }else{
+        $('#days').show();
+    }
+  
+  })
+
+})
+$(function(){
+	$('.WMA').change(function(){
+  	if(!$(this).prop('checked')){
+    	$('#days').hide();
+    }else{
+        $('#days').show();
+    }
+  
+  })
+
+})
 $('#enviar').click(function() {
     var selected = [];
     $(":checkbox[name=indi]").each(function() {
