@@ -44,29 +44,41 @@
                 <option value="walmart">WAL-MART</option>
             </select>
         
-            
-
+    
             <label class="form-check-label" for="EMA">EMA</label>
-            <input type="checkbox" value="EMA", name="indi" class="form-check-input" id="EMA" checked="yes"><br>
+            <input type="checkbox" value="EMA", name="indi" class="form-check-input EMA" id="EMA" checked="yes"><br>
 
             <label class="form-check-label" for="SMA">SMA</label>
-            <input type="checkbox" value="SMA", name="indi" class="form-check-input" id="SMA" ><br>
+            <input type="checkbox" value="SMA", name="indi" class="form-check-input SMA" id="SMA" ><br>
 
             <label class="form-check-label" for="SAR">SAR</label>
-            <input type="checkbox" value="SAR", name="indi" class="form-check-input" id="SAR" ><br>
+            <input type="checkbox" value="SAR", name="indi" class="form-check-input SAR" id="SAR" ><br>
             
             <label class="form-check-label" for="KAMA">KAMA</label>
-            <input type="checkbox" value="KAMA", name="indi" class="form-check-input" id="KAMA"><br>
+            <input type="checkbox" value="KAMA", name="indi" class="form-check-input KAMA" id="KAMA"><br>
             
             <label class="form-check-label" for="TEMA">TEMA</label>
-            <input type="checkbox" value="TEMA", name="indi" class="form-check-input" id="TEMA"><br>
+            <input type="checkbox" value="TEMA", name="indi" class="form-check-input TEMA" id="TEMA"><br>
             
             <label class="form-check-label" for="TRIMA">TRIMA</label>
-            <input type="checkbox" value="TRIMA", name="indi" class="form-check-input" id="TRIMA"><br>
+            <input type="checkbox" value="TRIMA", name="indi" class="form-check-input TRIMA" id="TRIMA"><br>
             
             <label class="form-check-label" for="WMA">WMA</label>
-            <input type="checkbox" value="WMA", name="indi" class="form-check-input" id="WMA" ><br>
+            <input type="checkbox" value="WMA", name="indi" class="form-check-input WMA" id="WMA" ><br>
             
+                <div id="days" style="display: none;">
+                    Ingrese el numero de dias: <input type="number" name="dias" min="10" value="20"/> <br>
+                    <button type="reset">Reiniciar</button> <br> 
+                </div>
+                <div id="sar" style="display: none;">    
+                    Ingrese la aceleración:  <input type="number" name="acceleration" min="0.02" value="0.02" step="0.01"/> <br>
+                    Ingrese el MAX: <input type="number" name="max" min="0.2" value="0.2" step="0.1"/> <br>
+                    <button type="reset">Reiniciar</button> <br>    
+                </div>
+
+
+
+
             <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
             </div>
         </form>
@@ -79,6 +91,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{% static "show_indicators/get-data.js" %}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
