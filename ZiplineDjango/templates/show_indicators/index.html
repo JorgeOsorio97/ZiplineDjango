@@ -1,14 +1,12 @@
 <!DOCTYPE html>
+{% extends "base.html" %}
 {% load staticfiles %}
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Visor de Acciones</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<body>
 
+{% block head_block %}
+        <title>Visor de Acciones</title>
+{% endblock %}
+
+{% block body_block %}
     <div class="jumbotron">
         <h1 class="display-4">Visor de Acciones</h1>
         <form  method="POST">
@@ -44,7 +42,7 @@
                 <option value="walmart">WAL-MART</option>
             </select>
         
-    
+            <!--
             <label class="form-check-label" for="EMA">EMA</label>
             <input type="checkbox" value="EMA", name="indi" class="form-check-input EMA" id="EMA" ><br>
 
@@ -75,25 +73,21 @@
                     Ingrese el MAX: <input type="number" name="max" min="0.2" value="0.2" step="0.1"/> <br>
                     <button type="reset">Reiniciar</button> <br>    
                 </div>
-
-
-
+            
 
             <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+            -->
+            <button type="button" class="btn btn-success " id="bestStrategy"> Estrategia Recomendada</button>
             </div>
         </form>
     </div>
 
     <div id="myDiv" style="width:600; height:800"></div> 
+    <div id="bestStrategyResult"></div>
 
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-    crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{% static "show_indicators/get-data.js" %}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}    

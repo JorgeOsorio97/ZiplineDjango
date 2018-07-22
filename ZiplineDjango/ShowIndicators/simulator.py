@@ -28,30 +28,47 @@ class Simulator:
         elif std_purchase is not None:
             self.init_capital = None
             self.std_purchase = std_purchase
+        
+        if len(self.indicators_names) is not 0:
+            self.cleanSimulator()
 
     final_capital = 0
     indicators_names = []
-    final_decision = []
     operations_made = 0
     shares_own = 0
     highest_point = 0
     lowest_point = 0 
     security_highest_point = 0
     security_lowest_point = 0 
+    real_init_capital = 0
+    real_final_capital = 0
+    diference_percentage = 0
 
     def check_first_purchase_method(self):
         if self.init_capital is not None and self.std_purchase is not None:
             if self.security['Close'].iloc[0] * self.std_purchase < self.init_capital:
+                self.real_init_capital = self.security['Close'].iloc[0] * self.std_purchase 
                 return "std_purchase"
             else:
+                self.real_init_capital = self.init_capital
                 return "init_capital"
         elif self.init_capital is not None:
+            self.real_init_capital = self.init_capital
             return "init_capital"
         elif self.std_purchase is not None:
+            self.real_init_capital = self.security['Close'].iloc[0] * self.std_purchase 
             return "std_purchase"
+    
+    def calcRealFinalCapital(self):
+       self.real_final_capital = (self.security['Close'].iloc[-1] * self.shares_own) + self.final_capital
+    
+    def calcDiferencePercentage(self):
+        self.diference_percentage = self.real_final_capital / self.real_init_capital
 
     def add_indicator(self, name:str, decision = {}):
+        name
         if len(self.security['Close']) == len(decision['decision']) and len(self.security['Close']) == len(decision['data']):
+            print(name)
             self.security[name + "_decision"] = decision['decision']
             self.security[name + "_data"] = decision['data']
             self.indicators_names.append(name)
@@ -59,25 +76,28 @@ class Simulator:
             print('el tamaño de tu decision es incorrecto')
 
     def calcDecision(self):
+        final_decision = [] 
+        #print(self.security.columns.values)
+        #print(self.indicators_names)
         if len(self.indicators_names)==0:
             return("Debes cargar los indicadores primero")
         for day in self.security.index.values:
             decision = pd.Series([])
             for indicator in self.indicators_names:
-                decision = decision.append(pd.Series(self.security[indicator].loc[day]), ignore_index=True)
+                decision = decision.append(pd.Series(self.security[indicator+'_decision'].loc[day]), ignore_index=True)
             decision.dropna()
             if len(decision) == 0:
-                self.final_decision.append(None)
+                final_decision.append(None)
             else:
                 sell_count = len(decision[decision == "Sell"])
                 buy_count = len(decision[decision == "Buy"])
                 if sell_count > buy_count:
-                    self.final_decision.append('Sell')
+                    final_decision.append('Sell')
                 elif sell_count < buy_count:
-                    self.final_decision.append('Buy')
+                    final_decision.append('Buy')
                 elif sell_count == buy_count:
-                    self.final_decision.append(self.final_decision[-1])
-        self.security['FinalDecision'] = self.final_decision
+                    final_decision.append(final_decision[-1])
+        self.security['FinalDecision'] = final_decision
             
     
     def calc_earning(self):
@@ -123,3 +143,18 @@ class Simulator:
                     self.highest_point = self.final_capital
                 if (self.lowest_point == None or self.lowest_point > (self.shares_own * self.security['Close'].iloc[i]) or self.lowest_point == 0):
                     self.lowest_point = self.final_capital 
+        self.calcRealFinalCapital()
+        self.calcDiferencePercentage()
+    
+    def cleanSimulator(self):
+        self.final_capital = 0
+        self.indicators_names = []
+        self.operations_made = 0
+        self.shares_own = 0
+        self.highest_point = 0
+        self.lowest_point = 0 
+        self.security_highest_point = 0
+        self.security_lowest_point = 0 
+        self.real_init_capital = 0
+        self.real_final_capital = 0
+        self.diference_percentage = 0

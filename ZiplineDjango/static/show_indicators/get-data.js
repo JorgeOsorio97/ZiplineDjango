@@ -34,9 +34,23 @@ $(function(){
             $('#sar').show();
         }
     } );
+})
 
-
-
+$('#bestStrategy').click(()=>{
+    console.log('solicitando best strategy');
+    
+    $.ajax({
+        type: 'post',
+        data:{
+            security: $('#security').val()
+        },
+        url:'/show_indicators/bestStrategy/',
+        success: function(data){
+            console.log(data);
+            $('#bestStrategyResult').html(data.toString())
+            
+        }
+    })
 })
 
 $('#enviar').click(function() {
@@ -52,7 +66,7 @@ $('#enviar').click(function() {
         type: 'post',
         dataType: 'json', 
         data:{'security':$('#security').val(),'indicators': selected}, 
-        csrfmiddlewaretoken: '{{ csrf_token }}',
+        csrfmiddlewaretoken: '{{ csrf_token }}', //TODO csrf token send cookie
         url: '/show_indicators/get-data/',
         success: function(data) {
           console.log('datos enviados');
