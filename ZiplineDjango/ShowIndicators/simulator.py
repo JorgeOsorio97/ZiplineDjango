@@ -65,7 +65,7 @@ class Simulator:
     def calcDiferencePercentage(self):
         self.diference_percentage = self.real_final_capital / self.real_init_capital
 
-    def add_indicator(self, name:str, decision = {}):
+    def add_indicator(self, name, decision = {}):
         name
         if len(self.security['Close']) == len(decision['decision']) and len(self.security['Close']) == len(decision['data']):
             print(name)
@@ -80,7 +80,7 @@ class Simulator:
         #print(self.security.columns.values)
         #print(self.indicators_names)
         if len(self.indicators_names)==0:
-            return("Debes cargar los indicadores primero")
+            print("Debes cargar los indicadores primero")
         for day in self.security.index.values:
             decision = pd.Series([])
             for indicator in self.indicators_names:

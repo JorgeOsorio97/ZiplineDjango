@@ -74,7 +74,7 @@ def testStrategy(data, security, tries = 100):
 
 def findBestStrategy(security):
     all_strategies = []
-    for i in list(Strategies.objects.all().values()):
+    for i in list(Strategies.objects.all().values()): #pylint: disable = E1101
         query = []
         for y in i:
             query.append(i[y])

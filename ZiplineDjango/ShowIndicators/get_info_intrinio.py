@@ -3,18 +3,18 @@ import numpy as np
 import pandas as pd
 
 def intrinio_security():
-    api_username = '8993a7d350ddc80795097189caecf28b'
-    api_password = '7f74a16a497c5f27204b15eebd3eeeae'
+    api_username = 'c6ac93b0501d1b82172c19fdca93dfc4'
+    api_password = '42af81ccd05ebf983d1c2ac2f197f2d0'
     base_url = "https://api.intrinio.com"
 
-    bmv = '^XMEX'
+    bmv = 'XMEX'
 
     request_url = base_url + '/historical_data'
     q_params = {
         'identifier': '1',
         'item': 'close_price',
         'start_date': '2007-01-01',
-        'end_date': '2018-06-04',   
+        'end_date': '2018-06-04',       
         'frequency': 'daily',
     }
 

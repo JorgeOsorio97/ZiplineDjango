@@ -8,18 +8,22 @@ import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-securities_dict = {'aeromex' : 'AEROMEX', 'ahmsa' : 'AHMSA',
-                    'americaMovil' : 'AmericaMovil', 'arcaContinental' : 'ArcaContinental-AC',
-                    'bachoco' : 'BACHOCO', 'bancoSantander' : 'BancoSANTANDER', 
-                    'bimbo' : 'BIMBO', 'bmv' : 'BMV', 'cablevision' : 'Cablevision', 
-                    'casaSaba' : 'Casa_SABA', 'cemex' : 'CEMEX', 'chedrahui' : 'CHDRAUI', 
-                    'cocacola' : 'Coca-Cola', 'consorcioAra' : 'Consorcio_ARA', 
-                    'elektra' : 'ELEKTRA', 'finamex': 'FINAMEX', 
-                    'firstMajesticSolveCorpFmsc' : 'FirstMajesticSolverCorp-FMSC', 
-                    'gennomaLab' : 'GENNOMA-LAB', 'gnp' : 'GrupoNacionalProvincial-GNP', 
-                    'grupoSports' : 'GrupoSports', 'liverpool' : 'LIVERPOOL', 
-                    'radioCentro' : 'RadioCENTRO', 'rotoplas' : 'ROTOPLAS', 
-                    'soriana' : 'SORIANA', 'televisa' : 'TELEVISA', 'walmart' : 'WAL-MART'} 
+#TODO general de views corregir los csrf exempt agregando a cookies el csrf
+
+# securities_dict = {'aeromex' : 'AEROMEX', 'ahmsa' : 'AHMSA',
+#                     'americaMovil' : 'AmericaMovil', 'arcaContinental' : 'ArcaContinental-AC',
+#                     'bachoco' : 'BACHOCO', 'bancoSantander' : 'BancoSANTANDER', 
+#                     'bimbo' : 'BIMBO', 'bmv' : 'BMV', 'cablevision' : 'Cablevision', 
+#                     'casaSaba' : 'Casa_SABA', 'cemex' : 'CEMEX', 'chedrahui' : 'CHDRAUI', 
+#                     'cocacola' : 'Coca-Cola', 'consorcioAra' : 'Consorcio_ARA', 
+#                     'elektra' : 'ELEKTRA', 'finamex': 'FINAMEX', 
+#                     'firstMajesticSolveCorpFmsc' : 'FirstMajesticSolverCorp-FMSC', 
+#                     'gennomaLab' : 'GENNOMA-LAB', 'gnp' : 'GrupoNacionalProvincial-GNP', 
+#                     'grupoSports' : 'GrupoSports', 'liverpool' : 'LIVERPOOL', 
+#                     'radioCentro' : 'RadioCENTRO', 'rotoplas' : 'ROTOPLAS', 
+#                     'soriana' : 'SORIANA', 'televisa' : 'TELEVISA', 'walmart' : 'WAL-MART'} 
+
+securities_dict = { 'walmart' : 'WAL-MART'} 
 
 # Create your views here.
 def index(request):
@@ -64,7 +68,8 @@ def callBestStrategy(request):
     print('callBestStrategy View')
     security = request.POST['security']
     security = securities_dict[security]
-    strategyLooper.testStrategy(pd.read_csv('static/show_indicators/historicos/'+security+'.csv'),security, tries = 1)
+    for x in securities_dict:
+        strategyLooper.testStrategy(pd.read_csv('static/show_indicators/historicos/'+securities_dict[x]+'.csv'),securities_dict[x], tries = 25)
     strategy = strategyLooper.findBestStrategy(security)
     print(strategy)
     return JsonResponse({'strategy': json.loads(strategy['Strategy'].iloc[0]), '%Up': strategy['%Up'].iloc[0]}) 

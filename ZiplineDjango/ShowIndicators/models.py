@@ -10,7 +10,7 @@ class Securities(models.Model):
         return self.name + ", " + self.security
 
 class Strategies(models.Model):
-    security = models.CharField(max_length =10)
+    security = models.CharField(max_length =50)
     strategy = JSONField()
     percentage_up = models.FloatField(default=None)
     last_modified = models.DateTimeField(auto_now = True )

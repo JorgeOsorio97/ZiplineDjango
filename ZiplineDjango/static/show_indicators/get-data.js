@@ -38,7 +38,6 @@ $(function(){
 
 $('#bestStrategy').click(()=>{
     console.log('solicitando best strategy');
-    
     $.ajax({
         type: 'post',
         data:{
@@ -47,10 +46,14 @@ $('#bestStrategy').click(()=>{
         url:'/show_indicators/bestStrategy/',
         success: function(data){
             console.log(data);
-            $('#bestStrategyResult').html(data.toString())
-            
+            var strategy = "";  
+            for(var x in data.strategy){
+                for(var y in x.parameters)
+                strategy +=`Indicador: ${x} parametros ${y} <br>`;
+            }
+            $('#bestStrategyResult').html(strategy);
         }
-    })
+    });
 })
 
 $('#enviar').click(function() {
