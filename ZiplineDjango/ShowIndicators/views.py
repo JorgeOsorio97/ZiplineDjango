@@ -10,20 +10,19 @@ import json
 
 #TODO general de views corregir los csrf exempt agregando a cookies el csrf
 
-# securities_dict = {'aeromex' : 'AEROMEX', 'ahmsa' : 'AHMSA',
-#                     'americaMovil' : 'AmericaMovil', 'arcaContinental' : 'ArcaContinental-AC',
-#                     'bachoco' : 'BACHOCO', 'bancoSantander' : 'BancoSANTANDER', 
-#                     'bimbo' : 'BIMBO', 'bmv' : 'BMV', 'cablevision' : 'Cablevision', 
-#                     'casaSaba' : 'Casa_SABA', 'cemex' : 'CEMEX', 'chedrahui' : 'CHDRAUI', 
-#                     'cocacola' : 'Coca-Cola', 'consorcioAra' : 'Consorcio_ARA', 
-#                     'elektra' : 'ELEKTRA', 'finamex': 'FINAMEX', 
-#                     'firstMajesticSolveCorpFmsc' : 'FirstMajesticSolverCorp-FMSC', 
-#                     'gennomaLab' : 'GENNOMA-LAB', 'gnp' : 'GrupoNacionalProvincial-GNP', 
-#                     'grupoSports' : 'GrupoSports', 'liverpool' : 'LIVERPOOL', 
-#                     'radioCentro' : 'RadioCENTRO', 'rotoplas' : 'ROTOPLAS', 
-#                     'soriana' : 'SORIANA', 'televisa' : 'TELEVISA', 'walmart' : 'WAL-MART'} 
+securities_dict = {'aeromex' : 'AEROMEX', 'ahmsa' : 'AHMSA',
+                    'americaMovil' : 'AmericaMovil', 'arcaContinental' : 'ArcaContinental-AC',
+                    'bachoco' : 'BACHOCO', 'bancoSantander' : 'BancoSANTANDER', 
+                    'bimbo' : 'BIMBO', 'bmv' : 'BMV', 'cablevision' : 'Cablevision', 
+                    'casaSaba' : 'Casa_SABA', 'cemex' : 'CEMEX', 'chedrahui' : 'CHDRAUI', 
+                    'cocacola' : 'Coca-Cola', 'consorcioAra' : 'Consorcio_ARA', 
+                    'elektra' : 'ELEKTRA', 'finamex': 'FINAMEX', 
+                    'firstMajesticSolveCorpFmsc' : 'FirstMajesticSolverCorp-FMSC', 
+                    'gennomaLab' : 'GENNOMA-LAB', 'gnp' : 'GrupoNacionalProvincial-GNP', 
+                    'grupoSports' : 'GrupoSports', 'liverpool' : 'LIVERPOOL', 
+                    'radioCentro' : 'RadioCENTRO', 'rotoplas' : 'ROTOPLAS', 
+                    'soriana' : 'SORIANA', 'televisa' : 'TELEVISA', 'walmart' : 'WAL-MART'} 
 
-securities_dict = { 'walmart' : 'WAL-MART'} 
 
 # Create your views here.
 def index(request):

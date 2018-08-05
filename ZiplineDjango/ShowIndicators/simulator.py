@@ -43,6 +43,8 @@ class Simulator:
     real_init_capital = 0
     real_final_capital = 0
     diference_percentage = 0
+    init_date = ""
+    end_date = ""
 
     def check_first_purchase_method(self):
         if self.init_capital is not None and self.std_purchase is not None:
@@ -61,6 +63,8 @@ class Simulator:
     
     def calcRealFinalCapital(self):
        self.real_final_capital = (self.security['Close'].iloc[-1] * self.shares_own) + self.final_capital
+       self.init_date = self.security.index.values[0]
+       self.end_date = self.security.index.values[-1]
     
     def calcDiferencePercentage(self):
         self.diference_percentage = self.real_final_capital / self.real_init_capital
@@ -158,3 +162,5 @@ class Simulator:
         self.real_init_capital = 0
         self.real_final_capital = 0
         self.diference_percentage = 0
+        self.init_date = ""
+        self.end_date = ""

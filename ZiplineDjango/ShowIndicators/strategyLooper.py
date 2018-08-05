@@ -1,13 +1,10 @@
-#from indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision # pylint: disable=E0401
-#from simulator import Simulator # pylint: disable=E0401
 from ShowIndicators.indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision # pylint: disable=E0401
-from ShowIndicators.simulator import Simulator # pylint: disable=E0401
-#import pandas_datareader as web
+from ShowIndicators.simulator import Simulator
 import pandas as pd
 import numpy as np
 import datetime as dt
 import json
-from ShowIndicators.models import   Strategies
+from ShowIndicators.models import Strategies
 
 start = dt.datetime(2015,1,1)
 end = dt.datetime(2017,12,31)
@@ -18,7 +15,6 @@ end = dt.datetime(2017,12,31)
 
 #data = pd.read_csv('static/show_indicators/historicos/'+security)
 #data = pd.read_csv(security + '.csv')
-cols = ['Security','Strategy','Final_Capital','%Up']
 
 
 def testStrategy(data, security, tries = 100):
@@ -63,7 +59,7 @@ def testStrategy(data, security, tries = 100):
         iteration_result =[security,strategy, sim.real_final_capital, sim.diference_percentage]
         print(iteration_result)
         result.append(iteration_result)
-        sqlappend = Strategies(security = security, strategy = strategy, percentage_up= sim.diference_percentage)
+        sqlappend = Strategies(security = security, strategy = strategy, percentage_up= sim.diference_percentage, trades = sim.operations_made, max_point = sim.highest_point, min_point = sim.lowest_point )
         print(sqlappend)
         sqlappend.save()
         sim.cleanSimulator()
