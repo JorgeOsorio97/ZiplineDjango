@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-from ShowIndicators import simulator, indicators, strategyLooper
+from ShowIndicators import simulator, indicators, strategies_utils
 import csv
 import io
 import pandas as pd
@@ -68,7 +68,7 @@ def callBestStrategy(request):
     security = request.POST['security']
     security = securities_dict[security]
     for x in securities_dict:
-        strategyLooper.testStrategy(pd.read_csv('static/show_indicators/historicos/'+securities_dict[x]+'.csv'),securities_dict[x], tries = 25)
-    strategy = strategyLooper.findBestStrategy(security)
-    print(strategy)
+        strategies_utils.testStrategy(pd.read_csv('static/show_indicators/historicos/'+securities_dict[x]+'.csv'),securities_dict[x], tries = 25)
+    strategy = strategies_utils.findBestStrategy(security)
+    print(strategy) 
     return JsonResponse({'strategy': json.loads(strategy['Strategy'].iloc[0]), '%Up': strategy['%Up'].iloc[0]}) 

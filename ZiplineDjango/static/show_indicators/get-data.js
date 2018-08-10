@@ -48,9 +48,17 @@ $('#bestStrategy').click(()=>{
             console.log(data);
             var strategy = "";  
             for(var x in data.strategy){
-                for(var y in x.parameters)
-                strategy +=`Indicador: ${x} parametros ${y} <br>`;
+                for(var y in data.strategy[x]){
+                    strategy +=`Indicador: ${x} <br>
+                                &nbsp parametros: <br>  `
+                    for(var z in data.strategy[x][y]){
+                        
+                        strategy += `&nbsp &nbsp ${z}: ${(data.strategy[x][y][z])} <br>`;
+                    }
+                }                
             }
+            console.log(strategy);
+            
             $('#bestStrategyResult').html(strategy);
         }
     });
@@ -69,7 +77,7 @@ $('#enviar').click(function() {
         type: 'post',
         dataType: 'json', 
         data:{'security':$('#security').val(),'indicators': selected}, 
-        csrfmiddlewaretoken: '{{ csrf_token }}', //TODO csrf token send cookie
+        csrfmiddlewaretoken: '{{ csrf_token }}', // TODO csrf token send cookie
         url: '/show_indicators/get-data/',
         success: function(data) {
           console.log('datos enviados');

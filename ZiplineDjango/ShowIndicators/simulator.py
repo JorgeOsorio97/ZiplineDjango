@@ -70,7 +70,6 @@ class Simulator:
         self.diference_percentage = self.real_final_capital / self.real_init_capital
 
     def add_indicator(self, name, decision = {}):
-        name
         if len(self.security['Close']) == len(decision['decision']) and len(self.security['Close']) == len(decision['data']):
             print(name)
             self.security[name + "_decision"] = decision['decision']

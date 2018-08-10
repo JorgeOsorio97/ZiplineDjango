@@ -6,16 +6,6 @@ import datetime as dt
 import json
 from ShowIndicators.models import Strategies
 
-start = dt.datetime(2015,1,1)
-end = dt.datetime(2017,12,31)
-
-  
-#data = web.DataReader(asset, 'morningstar', start= start, end=end)
-#data.index = data.index.droplevel()
-
-#data = pd.read_csv('static/show_indicators/historicos/'+security)
-#data = pd.read_csv(security + '.csv')
-
 
 def testStrategy(data, security, tries = 100):
     result = []
@@ -75,7 +65,17 @@ def findBestStrategy(security):
         for y in i:
             query.append(i[y])
         all_strategies.append(query)
-    all_strategies = pd.DataFrame(all_strategies, columns = ['id','Security','Strategy','%Up','LastModified'])
+    print(all_strategies[0])
+    all_strategies = pd.DataFrame(all_strategies, columns = ['id','Security','Strategy','%Up','LastModified','MaxPoint', 'MinPoint', 'Trades'])
     security_strategies = all_strategies[all_strategies['Security']==security]
     best_strategy = security_strategies[ security_strategies['%Up'] == security_strategies['%Up'].max()]
     return best_strategy
+
+
+def jsonToStrategy(strategy, data):
+    sim = Simulator(data, std_purchase = 10)
+    for name, indicator in strategy:
+        indicator_name = '{name}_'
+        sim.add_indicator('{name}_',)
+
+    return

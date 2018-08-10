@@ -24,9 +24,9 @@ def intrinio_security():
     n_pages = response.json()['total_pages']
     print(n_pages)
 
-    cols = ['Date','Open', 'High', 'Low', 'Close', 'Volume']
+    col = ['Date','Open', 'High', 'Low', 'Close', 'Volume']
 
-    df = pd.DataFrame(cols = cols)
+    df = pd.DataFrame(columns = col)
 
     for x in np.arange(n_pages):
 
