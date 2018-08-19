@@ -65,17 +65,45 @@ def findBestStrategy(security):
         for y in i:
             query.append(i[y])
         all_strategies.append(query)
-    print(all_strategies[0])
+    #print(all_strategies[0])
     all_strategies = pd.DataFrame(all_strategies, columns = ['id','Security','Strategy','%Up','LastModified','MaxPoint', 'MinPoint', 'Trades'])
     security_strategies = all_strategies[all_strategies['Security']==security]
     best_strategy = security_strategies[ security_strategies['%Up'] == security_strategies['%Up'].max()]
     return best_strategy
 
 
-def jsonToStrategy(strategy, data):
+def jsonStrategyToSim(strategy, data):
+    strategy = json.loads(strategy)
     sim = Simulator(data, std_purchase = 10)
-    for name, indicator in strategy:
-        indicator_name = '{name}_'
-        sim.add_indicator('{name}_',)
+    for indicator , val in strategy.items():
+        indicator_name = '{}'.format(indicator)
+        for param , value in val['parameters'].items():
+            indicator_name += '-{}'.format(value)
+        sim.add_indicator(indicator_name, defineStrategyFunction(indicator_name, data))
+        sim.calcDecision()
+    return sim
 
+def defineStrategyFunction(indicator_name, data):
+    indicator_name = indicator_name.split('-')
+    for i in range(len(indicator_name)):
+        if i == 0:
+            pass
+        else:
+            indicator_name[i] = float(indicator_name[i])
+    if indicator_name[0] == 'EMA':
+        return EMAdecision(data,indicator_name[1])
+    elif indicator_name[0] == 'KAMA':
+        return KAMAdecision(data,indicator_name[1])
+    elif indicator_name[0] == 'SMA':
+        return SMAdecision(data,indicator_name[1])
+    elif indicator_name[0] == 'TEMA':
+        return TEMAdecision(data,indicator_name[1])
+    elif indicator_name[0] == 'TRIMA':
+        return TRIMAdecision(data,indicator_name[1])
+    elif indicator_name[0] == 'WMA':
+        return WMAdecision(data,indicator_name[1])
+    elif indicator_name[0] == 'SAR':
+        return SARdecision(data,indicator_name[1], indicator_name[2])
+    else:
+        print('ERROR GRAVE NO SE ENCONTRO EL INDICADOR')
     return

@@ -45,6 +45,7 @@ class Simulator:
     diference_percentage = 0
     init_date = ""
     end_date = ""
+    last_decision = ""
 
     def check_first_purchase_method(self):
         if self.init_capital is not None and self.std_purchase is not None:
@@ -101,6 +102,7 @@ class Simulator:
                 elif sell_count == buy_count:
                     final_decision.append(final_decision[-1])
         self.security['FinalDecision'] = final_decision
+        self.last_decision = self.security['FinalDecision'].iloc[-1]
             
     
     def calc_earning(self):
@@ -163,3 +165,4 @@ class Simulator:
         self.diference_percentage = 0
         self.init_date = ""
         self.end_date = ""
+        self.last_decision = ""
