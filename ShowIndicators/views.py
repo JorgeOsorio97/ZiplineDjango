@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from ShowIndicators import simulator, indicators, strategies_utils, update_security
-import csv
-import io
 import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -30,14 +28,8 @@ def index(request):
 
 @csrf_exempt
 def getData(request):
-    print("si entro")
-    
-    print(request.POST)
     req_url = request.POST['security'] 
     indicators_req = dict(request.POST.lists())['indicators[]']
-    print(req_url)
-    print(securities_dict[req_url])
-    print(indicators_req)
     symbol = pd.read_csv('static/show_indicators/historicos/'+securities_dict[req_url]+'.csv')
     sim  = simulator.Simulator(symbol,std_purchase = 20)
     #TODO hacer que se agreguen dinamicamente los indicadores
@@ -45,7 +37,6 @@ def getData(request):
     sim.add_indicator('SMA-20',indicators.SMAdecision(symbol,20))
     sim.security.to_csv('ShowIndicators/result.csv', index = False)
     fileUrl = 'result.csv'
-    print(sim.security.tail())
     return JsonResponse({'URL' : fileUrl, 'indicators':[]})   
 
 def result(request):
@@ -56,7 +47,6 @@ def result(request):
 
 @csrf_exempt
 def pruebasPost(request):
-    print(request.POST)
     return JsonResponse({'succes': True})
 
 
