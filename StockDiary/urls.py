@@ -22,6 +22,6 @@ app_name = 'StockDiary'
 
 urlpatterns = [
 
-    re_path(r'^bestStrategy/$', views.callBestStrategy, name = 'bestStrategy'),
+    re_path(r'^otro/$', views.callBestStrategy, name = 'bestStrategy'),
     path('', views.index, name='index'),
 ]

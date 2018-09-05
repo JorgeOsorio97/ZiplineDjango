@@ -57,7 +57,7 @@ $('#bestStrategy').click(()=>{
                     }
                 }                
             }
-            console.log(strategy);
+            //console.log(strategy);|
             
             $('#bestStrategyResult').html(strategy);
         }
