@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf.urls import url
 from ZiplineDjango import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -25,3 +26,5 @@ urlpatterns = [
     re_path(r'^show_indicators/', include("ShowIndicators.urls")),
     path('', views.index, name='index'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
