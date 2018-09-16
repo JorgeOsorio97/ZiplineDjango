@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from ShowIndicators import views
 from django.conf.urls import url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 app_name = 'ShowIndicators'
 
@@ -28,3 +29,5 @@ urlpatterns = [
     re_path(r'^add_security/$', views.add_security, name = 'add_security'),
     path('', views.index, name='index'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
