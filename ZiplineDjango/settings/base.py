@@ -26,11 +26,11 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static')
 SECRET_KEY = '5^0vi8@-*1#$!wxla4f%t)86ctdhj)lejjav&x4qjvspb-epld'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True    
 
 ALLOWED_HOSTS = ['*']
 
-
+ADMINS = (('Jorge', 'jorge.valdez.osorio@gmail.com'))
 # Application definition
 
 INSTALLED_APPS = [
