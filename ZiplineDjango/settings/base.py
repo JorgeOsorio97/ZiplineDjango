@@ -30,6 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SERVER_EMAIL = "ziplinedjango@django.com"
 ADMINS = [('Jorge', 'jorge.valdez.osorio@gmail.com')]
 # Application definition
 
