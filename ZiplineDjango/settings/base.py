@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-ADMINS = (('Jorge', 'jorge.valdez.osorio@gmail.com'))
+ADMINS = [('Jorge', 'jorge.valdez.osorio@gmail.com')]
 # Application definition
 
 INSTALLED_APPS = [
