@@ -4,7 +4,7 @@ from .base import *
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
+STATICFILES_DIRS = None
 del STATICFILES_DIRS
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
