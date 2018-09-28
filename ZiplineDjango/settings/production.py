@@ -1,5 +1,11 @@
 from .base import *
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
+sentry_sdk.init(
+    dsn="https://46230e7aa5cb47259ccd3ebfb175efc8@sentry.io/1290269",
+    integrations=[DjangoIntegration()]
+)
 
 DEBUG = False
 
