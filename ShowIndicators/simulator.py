@@ -77,14 +77,14 @@ class Simulator:
             self.security[name + "_data"] = decision['data']
             self.indicators_names.append(name)
         else:
-            print('el tamaño de tu decision es incorrecto')
+            print('el tamaño de tu decision es incorrecto'.encode('utf-8'))
 
     def calcDecision(self):
         final_decision = [] 
         #print(self.security.columns.values)
         #print(self.indicators_names)
         if len(self.indicators_names)==0:
-            print("Debes cargar los indicadores primero")
+            print("Debes cargar los indicadores primero".encode('utf-8'))
         for day in self.security.index.values:
             decision = pd.Series([])
             for indicator in self.indicators_names:
