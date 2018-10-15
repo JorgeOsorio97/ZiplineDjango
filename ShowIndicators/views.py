@@ -8,27 +8,27 @@ import json
 
 #TODO general de views corregir los csrf exempt agregando a cookies el csrf
 
-securities_dict = {#'aeromex' : 'AEROMEX',
-                    #'americaMovil' : 'AMXA', 
-                    #'arcaContinental' : 'AC',
-                    #'bachoco' : 'BACHOCOB',
+securities_dict = {'aeromex' : 'AEROMEX',
+                    'americaMovil' : 'AMXA', 
+                    'arcaContinental' : 'AC',
+                    'bachoco' : 'BACHOCOB',
                     #'bancoSantander' : 'SAN',  ## eliminado por falta de datos
-                    #'bimbo' : 'BIMBO',
-                    #'bmv' : 'BOLSAA', 
-                    #'cablevision' : 'CABLECPO', 
-                    #'cemex' : 'CEMEXCPO',
-                    #'chedrahui' : 'CHDRAUIB', 
-                    #'cocacola' : 'Coca-Cola', 
+                    'bimbo' : 'BIMBO',
+                    'bmv' : 'BOLSAA', 
+                    'cablevision' : 'CABLECPO', 
+                    'cemex' : 'CEMEXCPO',
+                    'chedrahui' : 'CHDRAUIB', 
+                    'cocacola' : 'Coca-Cola', 
                     'consorcioAra' : 'ARA', 
-                    #'elektra' : 'ELEKTRA', 
-                    #'finamex': 'FINAMEXO', 
-                    #'gennomaLab' : 'Genomma-Lab', 
-                    #'gnp' : 'GNP', 
-                    #'grupoSports' : 'SPORTS', 
-                    #'radioCentro' : 'RCENTROA', 
-                    #'rotoplas' : 'AGUA', 
-                    #'soriana' : 'SORIANAB', 
-                    #'walmart' : 'WALMEX'
+                    'elektra' : 'ELEKTRA', 
+                    'finamex': 'FINAMEXO', 
+                    'gennomaLab' : 'Genomma-Lab', 
+                    'gnp' : 'GNP', 
+                    'grupoSports' : 'SPORTS', 
+                    'radioCentro' : 'RCENTROA', 
+                    'rotoplas' : 'AGUA', 
+                    'soriana' : 'SORIANAB', 
+                    'walmart' : 'WALMEX'
                     }
 
 # Create your views here.
@@ -66,8 +66,8 @@ def callBestStrategy(request):
     print('callBestStrategy View')
     security = request.POST['security']
     security = securities_dict[security]
-    for x in securities_dict: #for para crear estrategias
-           strategies_utils.testStrategy(pd.read_csv('static/show_indicators/historicos/'+securities_dict[x]+'.csv'),securities_dict[x], tries = 1)
+    # for x in securities_dict: #for para crear estrategias
+    #        strategies_utils.testStrategy(pd.read_csv('static/show_indicators/historicos/'+securities_dict[x]+'.csv'),securities_dict[x], tries = 1)
     strategy = strategies_utils.findBestStrategy(security)
     for key, value in securities_dict.items():    # for name, age in list.items():  (for Python 3.x)
         if value == security:
