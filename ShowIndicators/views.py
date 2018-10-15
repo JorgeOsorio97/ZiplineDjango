@@ -9,9 +9,9 @@ import json
 #TODO general de views corregir los csrf exempt agregando a cookies el csrf
 
 securities_dict = {'aeromex' : 'AEROMEX',
-                    'americaMovil' : 'AMXA', 
+                    #'americaMovil' : 'AMXA', 
                     #'arcaContinental' : 'AC',
-                    'bachoco' : 'BACHOCOB',
+                    #'bachoco' : 'BACHOCOB',
                     #'bancoSantander' : 'SAN',  ## eliminado por falta de datos
                     #'bimbo' : 'BIMBO',
                     'bmv' : 'BOLSAA', 

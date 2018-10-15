@@ -36,6 +36,7 @@ $(function(){
     } );
 })
 
+//----Solicitar Best Strategy
 $('#bestStrategy').click(()=>{
     console.log('solicitando best strategy');
     $.ajax({
@@ -52,7 +53,6 @@ $('#bestStrategy').click(()=>{
                     strategy +=`Indicador: ${x} <br>
                                 &nbsp parametros: <br>  `
                     for(var z in data.strategy[x][y]){
-                        
                         strategy += `&nbsp &nbsp ${z}: ${(data.strategy[x][y][z])} <br>`;
                     }
                 }                
