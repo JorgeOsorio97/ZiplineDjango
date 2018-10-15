@@ -21,13 +21,13 @@ securities_dict = {'aeromex' : 'AEROMEX',
                     #'cocacola' : 'Coca-Cola', 
                     'consorcioAra' : 'ARA', 
                     #'elektra    ' : 'ELEKTRA', 
-                    'finamex': 'FINAMEXO', 
+                    #'finamex': 'FINAMEXO', 
                     #'gennomaLab' : 'Genomma-Lab', 
                     #'gnp' : 'GNP', 
                     #'grupoSports' : 'SPORTS', 
                     #'radioCentro' : 'RCENTROA', 
                     #'rotoplas' : 'AGUA', 
-                    'soriana' : 'SORIANAB', 
+                    #'soriana' : 'SORIANAB', 
                     #'walmart' : 'WALMEX'
                     }
 
