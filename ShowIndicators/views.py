@@ -73,6 +73,7 @@ def callBestStrategy(request):
         if value == security:
             symbol = key
     symbol = pd.read_csv('static/show_indicators/historicos/'+securities_dict[symbol]+'.csv')
+    print(strategy)
     sim = strategies_utils.jsonStrategyToSim(strategy['Strategy'].iloc[0], symbol)
     return JsonResponse({'strategy': json.loads(strategy['Strategy'].iloc[0]), '%Up': strategy['%Up'].iloc[0], 'decision':sim.last_decision})
 
