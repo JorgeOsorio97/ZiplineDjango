@@ -65,7 +65,7 @@ def findBestStrategy(security):
         for y in i:
             query.append(i[y])
         all_strategies.append(query)
-    #print(all_strategies[0])
+    print(all_strategies[0])
     all_strategies = pd.DataFrame(all_strategies, columns = ['id','Security','Strategy','%Up','LastModified','MaxPoint', 'MinPoint', 'Trades'])
     security_strategies = all_strategies[all_strategies['Security']==security]
     best_strategy = security_strategies[ security_strategies['%Up'] == security_strategies['%Up'].max()]
