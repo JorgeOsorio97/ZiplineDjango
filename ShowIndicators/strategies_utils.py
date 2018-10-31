@@ -71,6 +71,7 @@ def findBestStrategy(security):
     security_strategies = all_strategies
 
     best_strategy = security_strategies[ security_strategies['%Up'] == security_strategies['%Up'].max()]
+    print(best_strategy)
     return best_strategy
 
 
