@@ -61,17 +61,14 @@ def testStrategy(data, security, tries = 100):
 def findBestStrategy(security):
     all_strategies = []
     for i in list(Strategies.objects.all().values().filter(security=security)): #pylint: disable = E1101
-        query = []
-        for y in i:
-            query.append(i[y])
-        all_strategies.append(query)
-    print(all_strategies[0])
+        all_strategies.append([i['id'], i['security'], i['strategy'], i['percentage_up'], i['last_modified'], i['max_point'],i['min_point'], i['trades']])
+    #print(all_strategies[0])
     all_strategies = pd.DataFrame(all_strategies, columns = ['id','Security','Strategy','%Up','LastModified','MaxPoint', 'MinPoint', 'Trades'])
     #security_strategies = all_strategies[all_strategies['Security']==security]
     security_strategies = all_strategies
 
     best_strategy = security_strategies[ security_strategies['%Up'] == security_strategies['%Up'].max()]
-    print(type(best_strategy))
+    print(best_strategy)
     return best_strategy
 
 
