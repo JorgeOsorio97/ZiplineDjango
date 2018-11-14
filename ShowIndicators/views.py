@@ -70,9 +70,9 @@ def callBestStrategy(request):
     #        strategies_utils.testStrategy(pd.read_csv('static/show_indicators/historicos/'+securities_dict[x]+'.csv'),securities_dict[x], tries = 1)
     strategy = strategies_utils.findBestStrategy(security)
     if len(strategy)>1:
-        strategy_temp = strategy['Strategy'].iloc[0]
+        strategy_temp = strategy.iloc[0].get("Strategy")
     else:
-        strategy_temp=strategy['Strategy']
+        strategy_temp=strategy.get("Strategy")
     for key, value in securities_dict.items():    # for name, age in list.items():  (for Python 3.x)
         if value == security:
             symbol = key
