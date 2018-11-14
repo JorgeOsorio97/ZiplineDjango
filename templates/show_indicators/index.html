@@ -7,85 +7,102 @@
 {% endblock %}
 
 {% block body_block %}
-    <div class="jumbotron">
-        <h1 class="display-4">Visor de Acciones</h1>
-        <form  method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-        
-            <select class="form-control" id="security">
-                <option value="aeromex">AEROMEX</option>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Visor de Acciones</h1>
+            <form  method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+            
+                <select class="form-control" id="security">
+                    <option value="aeromex">AEROMEX</option>
+                    <!--
+                    <option value="ahmsa">AHMSA</option>
+                   -->
+                    <option value="americaMovil">AmericaMovil</option>
+                    <option value="arcaContinental">ArcaContinental-AC</option>
+                    <option value="bachoco">BACHOCO</option>
+                    <option value="bancoSantander">BancoSANTANDER</option>
+                    <option value="bimbo">BIMBO</option>
+                    <option value="bmv">BMV</option>
+                    <option value="cablevision">Cablevision</option>
+                    <option value="casaSaba">Casa SABA</option>
+                    <option value="cemex">CEMEX</option>
+                    <option value="chedrahui">CHEDRAUI</option>
+                    <option value="cocacola">Coca-Cola</option>
+                    <option value="consorcioAra">Consorcio ARA</option>
+                    <option value="elektra">ELEKTRA</option>
+                    <option value="finamex">FINAMEX</option>
+                    <option value="firstMajesticSolveCorpFmsc">FirstMajesticSolverCorp-FMSC</option>
+                    <option value="gennomaLab">GENNOMA-LAB</option>
+                    <option value="gnp">GrupoNacionalProvincial-GNP</option>
+                    <option value="grupoSports">GrupoSports</option>
+                    <option value="liverpool">LIVERPOOL</option>
+                    <option value="radioCentro">RadioCENTRO</option>
+                    <option value="rotoplas">ROTOPLAS</option>
+                    <option value="soriana">SORIANA</option>
+                    <option value="televisa">TELEVISA</option>
+                    <option value="walmart">WAL-MART</option>
+                </select>
+            
                 <!--
-                <option value="ahmsa">AHMSA</option>
-               -->
-                <option value="americaMovil">AmericaMovil</option>
-                <option value="arcaContinental">ArcaContinental-AC</option>
-                <option value="bachoco">BACHOCO</option>
-                <option value="bancoSantander">BancoSANTANDER</option>
-                <option value="bimbo">BIMBO</option>
-                <option value="bmv">BMV</option>
-                <option value="cablevision">Cablevision</option>
-                <option value="casaSaba">Casa SABA</option>
-                <option value="cemex">CEMEX</option>
-                <option value="chedrahui">CHEDRAUI</option>
-                <option value="cocacola">Coca-Cola</option>
-                <option value="consorcioAra">Consorcio ARA</option>
-                <option value="elektra">ELEKTRA</option>
-                <option value="finamex">FINAMEX</option>
-                <option value="firstMajesticSolveCorpFmsc">FirstMajesticSolverCorp-FMSC</option>
-                <option value="gennomaLab">GENNOMA-LAB</option>
-                <option value="gnp">GrupoNacionalProvincial-GNP</option>
-                <option value="grupoSports">GrupoSports</option>
-                <option value="liverpool">LIVERPOOL</option>
-                <option value="radioCentro">RadioCENTRO</option>
-                <option value="rotoplas">ROTOPLAS</option>
-                <option value="soriana">SORIANA</option>
-                <option value="televisa">TELEVISA</option>
-                <option value="walmart">WAL-MART</option>
-            </select>
-        
-            <!--
-            <label class="form-check-label" for="EMA">EMA</label>
-            <input type="checkbox" value="EMA", name="indi" class="form-check-input EMA" id="EMA" ><br>
-
-            <label class="form-check-label" for="SMA">SMA</label>
-            <input type="checkbox" value="SMA", name="indi" class="form-check-input SMA" id="SMA" ><br>
-
-            <label class="form-check-label" for="SAR">SAR</label>
-            <input type="checkbox" value="SAR", name="indi" class="form-check-input SAR" id="SAR" ><br>
-            
-            <label class="form-check-label" for="KAMA">KAMA</label>
-            <input type="checkbox" value="KAMA", name="indi" class="form-check-input KAMA" id="KAMA"><br>
-            
-            <label class="form-check-label" for="TEMA">TEMA</label>
-            <input type="checkbox" value="TEMA", name="indi" class="form-check-input TEMA" id="TEMA"><br>
-            
-            <label class="form-check-label" for="TRIMA">TRIMA</label>
-            <input type="checkbox" value="TRIMA", name="indi" class="form-check-input TRIMA" id="TRIMA"><br>
-            
-            <label class="form-check-label" for="WMA">WMA</label>
-            <input type="checkbox" value="WMA", name="indi" class="form-check-input WMA" id="WMA" ><br>
-
-                <div id="days" style="display: none;">
-                    Ingrese el numero de dias: <input type="number" name="dias" min="10" value="20"/> <br>
-                    <button type="reset">Reiniciar</button> <br> 
+                <label class="form-check-label" for="EMA">EMA</label>
+                <input type="checkbox" value="EMA", name="indi" class="form-check-input EMA" id="EMA" ><br>
+    
+                <label class="form-check-label" for="SMA">SMA</label>
+                <input type="checkbox" value="SMA", name="indi" class="form-check-input SMA" id="SMA" ><br>
+    
+                <label class="form-check-label" for="SAR">SAR</label>
+                <input type="checkbox" value="SAR", name="indi" class="form-check-input SAR" id="SAR" ><br>
+                
+                <label class="form-check-label" for="KAMA">KAMA</label>
+                <input type="checkbox" value="KAMA", name="indi" class="form-check-input KAMA" id="KAMA"><br>
+                
+                <label class="form-check-label" for="TEMA">TEMA</label>
+                <input type="checkbox" value="TEMA", name="indi" class="form-check-input TEMA" id="TEMA"><br>
+                
+                <label class="form-check-label" for="TRIMA">TRIMA</label>
+                <input type="checkbox" value="TRIMA", name="indi" class="form-check-input TRIMA" id="TRIMA"><br>
+                
+                <label class="form-check-label" for="WMA">WMA</label>
+                <input type="checkbox" value="WMA", name="indi" class="form-check-input WMA" id="WMA" ><br>
+    
+                    <div id="days" style="display: none;">
+                        Ingrese el numero de dias: <input type="number" name="dias" min="10" value="20"/> <br>
+                        <button type="reset">Reiniciar</button> <br> 
+                    </div>
+                    <div id="sar" style="display: none;">    
+                        Ingrese la aceleración:  <input type="number" name="acceleration" min="0.02" value="0.02" step="0.01"/> <br>
+                        Ingrese el MAX: <input type="number" name="max" min="0.2" value="0.2" step="0.1"/> <br>
+                        <button type="reset">Reiniciar</button> <br>    
+                    </div>
+                
+    
+                <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+                -->
+                <button type="button" class="btn btn-success " id="bestStrategy"> Estrategia Recomendada</button>
                 </div>
-                <div id="sar" style="display: none;">    
-                    Ingrese la aceleración:  <input type="number" name="acceleration" min="0.02" value="0.02" step="0.01"/> <br>
-                    Ingrese el MAX: <input type="number" name="max" min="0.2" value="0.2" step="0.1"/> <br>
-                    <button type="reset">Reiniciar</button> <br>    
+            </form>
+        </div>
+    
+        <div id="myDiv" style="width:600; height:800"></div> 
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="admin-content analysis-progrebar-ctn res-mg-t-15">
+                    <h4>Decisión</h4>
+                    <h3 id="decision"></h3>
                 </div>
-            
-
-            <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
-            -->
-            <button type="button" class="btn btn-success " id="bestStrategy"> Estrategia Recomendada</button>
             </div>
-        </form>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <div class="admin-content analysis-progrebar-ctn res-mg-t-15 breadcomb-ctn">
+                        <h4>Estrategia</h4>
+                    <p id="bestStrategyResult"></p>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div id="myDiv" style="width:600; height:800"></div> 
-    <div id="bestStrategyResult"></div>
+    
+    
 
 
 

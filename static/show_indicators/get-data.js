@@ -60,6 +60,13 @@ $('#bestStrategy').click(()=>{
             //console.log(strategy);|
             
             $('#bestStrategyResult').html(strategy);
+            if(data.decision == 'Buy'){
+                $('#decision').css({'color':'green'});
+            }
+            else if(data.decision == 'Sell'){
+                $('#decision').css({'color':'red'});
+            }
+            $('#decision').html(data.decision)
         }
     });
 })
