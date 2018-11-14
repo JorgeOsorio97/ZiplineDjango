@@ -69,14 +69,17 @@ def callBestStrategy(request):
     # for x in securities_dict: #for para crear estrategias
     #        strategies_utils.testStrategy(pd.read_csv('static/show_indicators/historicos/'+securities_dict[x]+'.csv'),securities_dict[x], tries = 1)
     strategy = strategies_utils.findBestStrategy(security)
-    strategy_temp = type(strategy['Strategy'])
+    if len(strategy)>1:
+        strategy_temp = strategy['Strategy'].iloc[0]
+    else:
+        strategy_temp=strategy['Strategy']
     for key, value in securities_dict.items():    # for name, age in list.items():  (for Python 3.x)
         if value == security:
             symbol = key
     symbol = pd.read_csv('static/show_indicators/historicos/'+securities_dict[symbol]+'.csv')
     print(strategy)
-    sim = strategies_utils.jsonStrategyToSim(strategy['Strategy'].iloc[0], symbol)
-    return JsonResponse({'strategy': json.loads(strategy['Strategy'].iloc[0]), '%Up': strategy['%Up'].iloc[0], 'decision':sim.last_decision})
+    sim = strategies_utils.jsonStrategyToSim(strategy_temp, symbol)
+    return JsonResponse({'strategy': json.loads(strategy_temp), '%Up': strategy['%Up'].iloc[0], 'decision':sim.last_decision})
 
 
 def add_security(request):
