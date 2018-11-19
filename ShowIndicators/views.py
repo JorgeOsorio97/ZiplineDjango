@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-from ShowIndicators import simulator, indicators, strategies_utils, update_security
+from ShowIndicators import simulator, indicators, strategies_utils
 import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
 import json

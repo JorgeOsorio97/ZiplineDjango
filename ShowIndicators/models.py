@@ -6,7 +6,7 @@ class Securities(models.Model):
     security = models.CharField(max_length =10, unique = True)
     name = models.CharField(max_length = 50, unique = True)
     market = models.CharField(max_length = 50)
-    stocks_own = models.CharField
+    stocks_own = models.IntegerField(null=True)
     csv_file = models.CharField(max_length =50)
     last_update = models.CharField(max_length =15)
 
