@@ -18,7 +18,6 @@ class Command(BaseCommand):
             temp = Securities.objects.get(id=sec['id'])
             temp.last_update = str(dt.datetime.now().year) + str(dt.datetime.now().month) + str(dt.datetime.now().day)
             temp.save()
-        #return super().handle(*args, **options) 
     
 
 
