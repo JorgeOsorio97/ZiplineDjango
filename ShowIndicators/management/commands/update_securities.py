@@ -3,14 +3,12 @@ from ShowIndicators.models import Securities
 import pandas as pd
 import datetime as dt
 from ShowIndicators.get_info_wtd import get_today_data_wtd
+from ShowIndicators.strategies_utils import updateSecurity
 
 
 class Command(BaseCommand):
     secs = Securities.objects.values('id', 'security', 'market', 'csv_file','last_update')
     secs = list(secs)
-    def add_arguments(self, parser):
-        #super.add_arguments(self, parser)
-        pass
 
     def handle(self, *args, **options):
         for sec in self.secs:
@@ -23,11 +21,4 @@ class Command(BaseCommand):
 
 
 
-def updateSecurity(file_name, security):
-    df = pd.read_csv(file_name, index_col = 0)
-    print(df.head())
-    if not df['Date'].iloc[-1] == str(dt.datetime.now().year) + str(dt.datetime.now().month) + str(dt.datetime.now().day):
-        today_data = get_today_data_wtd(security)
-        df.append(today_data, ignore_index = True)
-        print(df.head())
-    df.to_csv(file_name, index = False)
+

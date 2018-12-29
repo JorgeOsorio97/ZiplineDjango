@@ -57,7 +57,6 @@ def testStrategy(data, security, tries = 100):
     cols = ['Security','Strategy','Final_Capital','%Up']
     result = pd.DataFrame(result, columns=cols)
     
-
 def findBestStrategy(security):
     all_strategies = []
     for i in list(Strategies.objects.all().values().filter(security=security)): #pylint: disable = E1101
@@ -70,7 +69,6 @@ def findBestStrategy(security):
     best_strategy = security_strategies[ security_strategies['%Up'] == security_strategies['%Up'].max()]
     print(best_strategy)
     return best_strategy
-
 
 def jsonStrategyToSim(strategy, data):
     strategy = json.loads(strategy)
@@ -107,3 +105,12 @@ def defineStrategyFunction(indicator_name, data):
     else:
         print('ERROR GRAVE NO SE ENCONTRO EL INDICADOR')
     return
+
+def updateSecurity(file_name, security):
+    df = pd.read_csv(file_name, index_col = 0)
+    print(df.head())
+    if not df['Date'].iloc[-1] == str(dt.datetime.now().year) + str(dt.datetime.now().month) + str(dt.datetime.now().day):
+        today_data = get_today_data_wtd(security)
+        df.append(today_data, ignore_index = True)
+        print(df.head())
+    df.to_csv(file_name, index = False)

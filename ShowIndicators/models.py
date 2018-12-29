@@ -4,15 +4,17 @@ from django.contrib.postgres.fields import JSONField
 class Securities(models.Model):
     id = models.AutoField(primary_key = True)
     security = models.CharField(max_length =10, unique = True)
-    name = models.CharField(max_length = 50, unique = True)
+    name = models.CharField(max_length = 50)
     market = models.CharField(max_length = 50)
     stocks_own = models.IntegerField(null=True)
-    csv_file = models.CharField(max_length =50)
-    last_update = models.CharField(max_length =15)
+    providers_name = JSONField(null=True)
+    csv_file = models.CharField(max_length =50, null=True)
+    last_update = models.DateField(auto_now=True)  
+
 
     def __str__(self):
         return self.name + " - " + self.security
-
+        
 class Strategies(models.Model):
     id = models.AutoField(primary_key = True)
     security = models.CharField(max_length = 50)
@@ -23,6 +25,6 @@ class Strategies(models.Model):
     min_point = models.FloatField(null=True)
     trades = models.IntegerField(null=True)
 
-
+    
     def __str__(self):
-        return self.security + ',' + self.strategy    
+        return self.security + ',' + self.id   

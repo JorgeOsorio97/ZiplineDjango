@@ -26,7 +26,8 @@ urlpatterns = [
     re_path(r'^get-data/$', views.getData, name='get-data'),
     re_path(r'^result/$', views.result, name='result'),
     re_path(r'^bestStrategy/$', views.callBestStrategy, name = 'bestStrategy'),
-    re_path(r'^add_security/$', views.add_security, name = 'add_security'),
+    re_path(r'^add_security/$', views.addSecurity, name = 'addSecurity'),
+    re_path(r'^new_security/$', views.newSecurity, name = 'newSecurity'),
     path('', views.index, name='index'),
 ]
 

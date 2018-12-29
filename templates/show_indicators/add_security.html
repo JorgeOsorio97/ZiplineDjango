@@ -10,23 +10,32 @@
     <div class="container">
         <div class="jumbotron">
             <h1 class="display-4 text-white">Agregar Acciones</h1>
-            <form  method="POST">   
+            <form>   
                 {% csrf_token %}
                 <label for="security_name">Nombre de la Empresa</label>
-                <input type="text" id="security_name" class="form-control" placeholder="ex: Apple Inc.">
+                <input type="text" id="security_name" class="form-control" placeholder="ex: Apple Inc."/>
                 <label for="security_code">Codigo</label>
-                <input type="text" id="security_code" class="form-control" placeholder="ex: AAPL">
+                <input type="text" id="security_code" class="form-control" placeholder="ex: AAPL"/>
                 <select id="market">
                     <option value="BMV">BMV</option>
                 </select><br>
                 <label for="csv_file">Archivo CSV</label>
-                <input type="text" id="csv_file" class="form-control" placeholder="ex: aapl.csv">
+                <input type="text" id="csv_file" class="form-control" placeholder="ex: aapl.csv"/>
                 
             
-                
+
                 <button type="button" class="btn btn-success " id="add_security"> Estrategia Recomendada</button>
                 
             </form>
+            
+            <h2>Subir con archivo</h2>
+            
+            <form method="POST" action="{% url 'ShowIndicators:addSecurity' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" value="Enviar"/>
+            </form>
+            
         </div>
         
     </div>
