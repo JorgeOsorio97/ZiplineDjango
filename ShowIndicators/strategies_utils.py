@@ -115,7 +115,7 @@ def defineStrategyFunction(indicator_name, data):
 def updateSecurity(file_name, security):
     file_name = os.path.join(os.path.join(STATIC_DIR,"historicos"),file_name)
     print(file_name)
-    df = pd.read_csv(file_name)
+    #df = pd.read_csv(file_name)
     print(df.tail())
     # TODO: hacer que solo atualice un dia
     if not df['Date'].iloc[-1] == str(dt.datetime.now().year) + str(dt.datetime.now().month) + str(dt.datetime.now().day):
