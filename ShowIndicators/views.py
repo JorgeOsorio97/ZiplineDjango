@@ -8,7 +8,7 @@ import json, csv
 from ShowIndicators.models import Securities
 from datetime import datetime
 
-#TODO general de views corregir los csrf exempt agregando a cookies el csrf
+# TODO: general de views corregir los csrf exempt agregando a cookies el csrf
 
 securities_dict = {'aeromex' : 'AEROMEX',
                     'americaMovil' : 'AMXA', 
@@ -36,6 +36,7 @@ securities_dict = {'aeromex' : 'AEROMEX',
 # Create your views here.
 def index(request):
     print('index')
+    secs = Securities.objects.values('id', 'name', 'last_update')
     #getData(request)
     return render(request, 'show_indicators/index.html')
 
@@ -45,7 +46,7 @@ def getData(request):
     indicators_req = dict(request.POST.lists())['indicators[]']
     symbol = pd.read_csv('static/show_indicators/historicos/'+securities_dict[req_url]+'.csv')
     sim  = simulator.Simulator(symbol,std_purchase = 20)
-    #TODO hacer que se agreguen dinamicamente los indicadores
+    # TODO: hacer que se agreguen dinamicamente los indicadores
     sim.add_indicator('SMA-50',indicators.SMAdecision(symbol,50))
     sim.add_indicator('SMA-20',indicators.SMAdecision(symbol,20))
     sim.security.to_csv('ShowIndicators/result.csv', index = False)
@@ -87,9 +88,9 @@ def addSecurity(request):
         print(request.FILES)
         data = pd.read_csv(request.FILES['file'])
         #print(data.head())
-        #TODO agregar try para evita cargar errores
-        #TODO agregar revision de securities repetidos
-        #TODO agregar descarga de plantilla
+        # TODO: agregar try para evita cargar errores
+        # TODO: agregar revision de securities repetidos
+        # TODO: agregar descarga de plantilla
         for index, row in data.iterrows():
             temp = Securities()
             temp.security = row['security']

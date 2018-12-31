@@ -1,10 +1,15 @@
 from ShowIndicators.indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision # pylint: disable=E0401
 from ShowIndicators.simulator import Simulator
+from ShowIndicators.models import Strategies
+from ShowIndicators.get_info_wtd import get_all_data_wtd
 import pandas as pd
 import numpy as np
 import datetime as dt
 import json
-from ShowIndicators.models import Strategies
+import os
+
+
+from ZiplineDjango.settings.base import STATIC_DIR
 
 
 def testStrategy(data, security, tries = 100):
@@ -57,6 +62,7 @@ def testStrategy(data, security, tries = 100):
     cols = ['Security','Strategy','Final_Capital','%Up']
     result = pd.DataFrame(result, columns=cols)
     
+# TODO: Cambiar a que busque la best strategy y agregue en su security
 def findBestStrategy(security):
     all_strategies = []
     for i in list(Strategies.objects.all().values().filter(security=security)): #pylint: disable = E1101
@@ -107,10 +113,15 @@ def defineStrategyFunction(indicator_name, data):
     return
 
 def updateSecurity(file_name, security):
-    df = pd.read_csv(file_name, index_col = 0)
-    print(df.head())
+    file_name = os.path.join(os.path.join(STATIC_DIR,"historicos"),file_name)
+    print(file_name)
+    df = pd.read_csv(file_name)
+    print(df.tail())
+    # TODO: hacer que solo atualice un dia
     if not df['Date'].iloc[-1] == str(dt.datetime.now().year) + str(dt.datetime.now().month) + str(dt.datetime.now().day):
-        today_data = get_today_data_wtd(security)
+        today_data = get_all_data_wtd(security)
         df.append(today_data, ignore_index = True)
         print(df.head())
-    df.to_csv(file_name, index = False)
+        today_data.to_csv(file_name, index = False)
+    
+    #df.to_csv(file_name, index = False)

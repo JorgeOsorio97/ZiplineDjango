@@ -14,11 +14,6 @@ class Command(BaseCommand):
         for sec in self.secs:
             updateSecurity(sec['csv_file'],sec['security'])
             temp = Securities.objects.get(id=sec['id'])
-            temp.last_update = str(dt.datetime.now().year) + str(dt.datetime.now().month) + str(dt.datetime.now().day)
+            temp.last_update = dt.date.today()
             temp.save()
     
-
-
-
-
-
