@@ -3,3 +3,4 @@
 .sock
 migrations/
 historicos/*
+!historicos/.gitkeep
