@@ -120,8 +120,8 @@ def updateSecurity(file_name, security):
     # TODO: hacer que solo atualice un dia
     #if not df['Date'].iloc[-1] == str(dt.datetime.now().year) + str(dt.datetime.now().month) + str(dt.datetime.now().day):
     today_data = get_all_data_wtd(security)
-    df.append(today_data, ignore_index = True)
-    print(df.head())
+    #df.append(today_data, ignore_index = True)
+    #print(df.head())
     today_data.to_csv(file_name, index = False)
     
     #df.to_csv(file_name, index = False)
