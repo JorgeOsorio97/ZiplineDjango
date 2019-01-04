@@ -29,4 +29,4 @@ class Strategies(models.Model):
 
     
     def __str__(self):
-        return self.security + ',' + self.id   
+        return self.id

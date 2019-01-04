@@ -81,6 +81,15 @@ def callBestStrategy(request):
     sim = strategies_utils.jsonStrategyToSim(strategy_temp, symbol)
     return JsonResponse({'strategy': json.loads(strategy_temp), '%Up': strategy['%Up'].iloc[0], 'decision':sim.last_decision})
 
+@csrf_exempt
+def strategyCreator(request):
+    if request.method == "POST":
+        print('Creating strategies')
+        secs = Securities.objects.values('csv_file', 'security')
+        for sec in secs:
+            strategies_utils.testStrategy(pd.read_csv('static/historicos/'+ sec['csv_file']), sec['security'], tries = int(request.POST['quantity']))
+        return JsonResponse({'succes':'true'})
+    return render(request, 'show_indicators/strategy_creator.html')
 
 def addSecurity(request):
     if request.method == "POST":
@@ -104,7 +113,7 @@ def addSecurity(request):
     form = forms.UploadFileForm()
     #print(form)
     return render(request, 'show_indicators/add_security.html', {'form': form})
-
+ 
 @csrf_exempt
 def newSecurity(request):
     print("new_security")

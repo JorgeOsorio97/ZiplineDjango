@@ -42,6 +42,3 @@ def get_today_data_wtd(security):
     return df.iloc[0]
 
 
-data = get_all_data_wtd('AC')
-print(data.head())
-print(data.tail())

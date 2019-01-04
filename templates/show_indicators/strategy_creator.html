@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block head_block %}
+        <title>Visor de Acciones</title>
+{% endblock %}
+
+{% block body_block %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4 text-white">Generar Estrategias    </h1>
+            <form>   
+                {% csrf_token %}
+                <label for="security_name">Cantidad de Estrategias a generar por empresa:</label>
+                <input type="number" id="quantity" class="form-control"/>
+                
+                <button type="button" class="btn btn-success " id="submit"> Estrategia Recomendada</button>
+            </form>
+            
+            
+            
+        </div>
+        
+    </div>
+
+    
+
+
+
+
+    <script src="{% static "show_indicators/strategy_creator.js" %}"></script>
+{% endblock %}    
