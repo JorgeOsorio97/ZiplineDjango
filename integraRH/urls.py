@@ -19,11 +19,13 @@ from integraRH import views
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-app_name = 'intergaRH'
+app_name = 'integraRH'
 
 urlpatterns = [
 
     #re_path(r'^otro/$', views.callBestStrategy, name = 'bestStrategy'),
+    re_path(r'^registroInicialTrabajador/$', views.regristroInicialTrabajador, name="registroInicialTrabajador"),
+    re_path(r'^visualizadorTrabajador/$', views.visualizadorTrabajador, name="visualizadorTrabajador"),
     path('', views.index, name='index'),
 ]
 

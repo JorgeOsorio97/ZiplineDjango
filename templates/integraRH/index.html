@@ -1,5 +1,15 @@
 {% extends "integraRH/base.html"%}
 
 {% block body_block %}
-<p>hola</p>
+    <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-4">Bienvendio a tu sistema de gestion de trabajadores.</h1>
+                <p>¿Que quieres hacer?</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="{% url 'integraRH:registroInicialTrabajador' %}" role="button">Dar de alta un trabajador</a>
+                    <a class="btn btn-primary btn-lg" href="{% url 'integraRH:visualizadorTrabajador' %}" role="button">Revisar datos de un trabajador</a>
+                </p>
+            </div>
+    </div>
+    
 {% endblock body_block%}

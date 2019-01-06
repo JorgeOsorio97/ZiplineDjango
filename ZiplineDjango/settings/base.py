@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ShowIndicators',
     'StockDiary',
+    'integraRH',
 ]
 
 MIDDLEWARE = [
