@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from ShowIndicators import views
+from StockDiary import views
 from django.conf.urls import url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -23,7 +23,6 @@ app_name = 'StockDiary'
 
 urlpatterns = [
 
-    re_path(r'^otro/$', views.callBestStrategy, name = 'bestStrategy'),
     path('', views.index, name='index'),
 ]
 
