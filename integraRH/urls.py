@@ -26,6 +26,7 @@ urlpatterns = [
     #re_path(r'^otro/$', views.callBestStrategy, name = 'bestStrategy'),
     re_path(r'^registroInicialTrabajador/$', views.regristroInicialTrabajador, name="registroInicialTrabajador"),
     re_path(r'^visualizadorTrabajador/$', views.visualizadorTrabajador, name="visualizadorTrabajador"),
+    re_path(r'^formularioTrabajador/$', views.formularioTrabajador, name="formularioTrabajador"),
     path('', views.index, name='index'),
 ]
 

@@ -1,0 +1,7 @@
+Integra te invita a formar parte de su equipo:
+Buen dia {{ name }},
+Te envió correo para tu contratación con ingreso el dia 26 de diciembre alas 9am en las oficinas de Sytecso  ubicadas privada Pino Suárez 300 Piso 12, Centro, 64000 Monterrey, N.L. a las 9:30am, el puesto que ocuparas es como AUXILIAR DE TECNICO INSTALADOR con un sueldo de $7000 libres +PL
+Importante:
+Te pedimos entres a la siguiente pagina y nos ayudes a seguir los pasos ahi mostrados para terminar tu proceso de contratación.
+En espera de tu confirmación
+Saludos Cordiales!

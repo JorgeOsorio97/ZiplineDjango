@@ -1,5 +1,16 @@
 {% extends 'integraRH/base.html' %}
 
 {% block body_block %}
-    <p>registroInicialTrsabajador</p>
+    <div class="container col-lg-2"></div>
+    <div class="container col-lg-8">
+    <form method="POST" action="{% url 'integraRH:registroInicialTrabajador' %}">
+        <label for="name"> Nombre: </label>
+        <input type="text" class="form-control" id="name" name="name">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email">
+        <input type="submit" class="btn btn-primary" value="Enviar">
+    </form>
+    <div class="container col-lg-2" ></div>
+
+    </div>
 {% endblock body_block %}
