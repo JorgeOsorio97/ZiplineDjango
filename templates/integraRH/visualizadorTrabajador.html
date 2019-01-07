@@ -1,8 +1,15 @@
 {% extends 'integraRH/base.html' %}
 
 {% block body_block %}
-    {% for key, val in  data.items %}
-        <h3>{{key}}:</h3>
-        <p>{{val}}</p>
-    {% endfor %}
+<div class="row">
+    <div class="container col-md-2"></div>
+    <div class="container col-md-8">
+        {% for key, val in  data.items %}
+            <h3>{{key}}:</h3>
+            <p>{{val}}</p>
+        {% endfor %}
+    </div>
+    <div class="container col-md-2"></div>
+</div>
+    
 {% endblock body_block %}
