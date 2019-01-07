@@ -1,7 +1,13 @@
 {% extends 'integraRH/base.html' %}
 {% block body_block %}
 
-
+{% if trabajadorCreado %}
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Tus datos han sido enviados!</h4>
+        <p>Gracias por llenar tus datos, pronto nos pondremos en contacto contigo.</p>
+        
+    </div>
+{% endif %}
 <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class = "sparkline12-list">
         <div class = "sparkline12-hd">
@@ -15,7 +21,8 @@
                     
                     <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class = "all-form-element-inner">
-                            <form action = "#" method = "get">
+                            <form action = "{% url 'integraRH:formularioTrabajador' %}" method = "POST">
+                                {% csrf_token %}
                                 <div class = "form-group-inner">
                                     <div class = "row">
                                         
@@ -67,8 +74,8 @@
                                             <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                                     <label class = "login2 pull-right pull-right-pro">Nombre del conyugue: </label>
                                             </div>
-                                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                <input class="form-control" type = text id = "couple" name = "couple">|
+                                            <div class = "col-lg-9 col-md-9 col-sm-9s col-xs-12">
+                                                <input class="form-control" type = text id = "couple" name = "couple">
                                             </div>
                                     </div>
                                     <div class = "row">
@@ -77,7 +84,7 @@
                                                 <label class = "login2-pull-right pull-right-pro">Edad: </label>
                                         </div>
                                         
-                                            <div class = "login2-pull-right pull-right-pro">
+                                                <div class = "col-lg-9 col-md-9 col-sm-9s col-xs-12">   
                                                 <input type = "number" id = "age" name = "age" min = "18">
                                             </div>
                                     </div>
@@ -103,6 +110,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="submit" class="btn btn-primary" value="Enviar">
                             </form>
                         </div>
                     </div>

@@ -23,17 +23,17 @@
                         <div class="" id="">
                         <ul class="navbar-nav mr-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href = "www.cintegra.com.mx">
+                                    <a class="nav-link" href = "{% url 'integraRH:index' %}">
                                         Inicio
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" ref = "{% url 'integraRH:registroInicialTrabajador' %}">
+                                    <a class="nav-link" href = "{% url 'integraRH:registroInicialTrabajador' %}">
                                         Nuevo Trabajador
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" ref = "{% url 'integraRH:visualizadorTrabajador' %}">
+                                    <a class="nav-link" href = "{% url 'integraRH:visualizadorTrabajador' %}">
                                         Revisar Trabajador
                                     </a>
                                 </li>
