@@ -1,6 +1,14 @@
 {% extends 'integraRH/base.html' %}
 
 {% block body_block %}
+
+    {% if trabajadorCreado %}
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Correo Enviado!</h4>
+            
+        </div>
+    {% endif %}
+
     <div class="container col-lg-2"></div>
     <div class="container col-lg-8">
     <form method="POST" action="{% url 'integraRH:registroInicialTrabajador' %}">
