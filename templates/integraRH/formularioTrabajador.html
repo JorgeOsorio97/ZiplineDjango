@@ -1,4 +1,155 @@
 {% extends 'integraRH/base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro trabajador</title>
+</head>
+<body>
+    <header id = "topNav">
+        <div class = "container">
+            <div class="col">
+                <a class = "logo" href = "base.html">
+                    <img class = "img" src = "{% static "integraRH/integra.jpeg" %}" alt ="" width="58%" height="88%">
+                </a>
+            </div>
+            <div class = "nav-bar">
+                <nav class = "nav-main">
+                    <ul id = "topMain" class="nav nav-pills">
+                            <li class = "active">
+                                <a href = "www.cintegra.com.mx">
+                                Home
+                                </a>
+                            </li>
+                            <li class = "">
+                                <a href = "{% url 'integraRH:usuarioIntegra' %}">
+                                Iniciar sesion
+                                </a>    
+                            </li>
+                            <li class = " ">
+                                <a href = "{% url 'integraRH:formularioTrabajador' %}">
+                                Llenar datos
+                                </a>
+                            </li>
+                        </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class = "sparkline12-list">
+            <div class = "sparkline12-hd">
+                <div class = "main-sparkline12-hd">
+                    <h1>Llena aqui tus datos</h1>
+                </div>    
+            </div>
+            <div class = "sparkline12-graph">
+                <div class = "basic-login-form-ad">
+                    <div class="row">
+                        ::before
+                        <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class = "all-form-element-inner">
+                                <form action = "#" method = "get">
+                                    <div class = "form-group-inner">
+                                        <div class = "row">
+                                            ::before
+                                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                <label class = "login2 pull-right pull-right-pro">Nombre(s)</label>
+                                            </div>
+                                            <div class = "col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input class="form-control" type = text>
+                                            </div>
+                                            ::after
+                                        </div>
+                                        <div class = "row">
+                                            ::before
+                                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                <label class = "login2 pull-right pull-right-pro">Apellido Paterno</label>
+                                            </div>
+                                            <div class = "col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input class="form-control" type = text>
+                                            </div>
+                                            ::after
+                                        </div>
+                                        <div class = "row">
+                                            ::before
+                                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                <label class = "login2 pull-right pull-right-pro">Apellido Materno</label>
+                                            </div>
+                                            <div class = "col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input class="form-control" type = text>
+                                            </div>
+                                            ::after
+                                        </div>
+                                    </div>
+                                    <div class = "form-group-inner">
+                                            <div class = "row">
+                                                ::before
+                                                <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                    <label class = "login2-pull-right pull-right-pro">Estado Civil: </label>
+                                                </div>
+                                                <div class = "col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                    <div class = "form-select-list">
+                                                        <select class = "form-control custom-select-value" name = "account">
+                                                            <option>Soltero(a)</option>
+                                                            <option>Casado(a)</option>
+                                                            <option>Divorciado(a)</option>
+                                                            <option>Viudo(a)</option>
+                                                            <option>Union Libre</option>
+                                                        </select>
+                                                    <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                            <label class = "login2 pull-right pull-right-pro">Nombre del conyugue</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class = "form-group-inner">
+                                        <div class = "row">
+                                            ::before
+                                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                    <label class = "login2-pull-right pull-right-pro">Edad: </label>
+                                            </div>
+                                            <div class = "col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <div class = "ogin2-pull-right pull-right-pro">
+                                                    <input type = "number" name = "edad" min = "18">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "form-group-inner">
+                                        <div class = "row">
+                                            ::before
+                                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                <label class = "login2 pull-right pull-right-pro">RFC con Homoclave: </label>
+                                            </div>
+                                            <div class = "col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input class="form-control" type = text>
+                                            </div>
+                                            ::after
+                                        </div>
+                                        <div class = "row">
+                                            ::before
+                                            <div class = "col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                <label class = "login2 pull-right pull-right-pro">CURP: </label>
+                                            </div>
+                                            <div class = "col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                <input class="form-control" type = text>
+                                            </div>
+                                            ::after
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+</body>
+</html>
 
 {% block body_block %}
     <p>formularioTrbajador</p>
