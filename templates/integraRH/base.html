@@ -8,50 +8,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
+    </head>
 <body>
-    <header id = "topNav">
-        <div class = "container">
-            <div class="col">
-                <a class = "logo" href = "base.html">
-                    <img class = "img" src = "{% static "integraRH/integra.jpeg" %}" alt ="" width="58%" height="88%">
-                </a>
-            </div>
-            <div class = "nav-bar">
-                <nav class = "nav-main">
-                    <ul id = "topMain" class="nav nav-pills">
-                            <li class = "active">
-                                <a href = "www.cintegra.com.mx">
-                                Home
-                                </a>
-                            </li>
-                            <li class = "">
-                                <a href = "usuario.html">
-                                Iniciar sesion
-                                </a>    
-                            </li>
-                            <li class = " ">
-                                <a href = "{% url 'integraRH:registroInicialTrabajador' %}">
-                                Llenar datos
-                                </a>
-                            </li>
-                        </ul>
-                </nav>
-            </div>
-        </div>
+    <header>
+            <nav class="navbar navbar-dark bg-dark">
+                
+                        <div class="col">
+                            <a class = "navbar-brand" href = "{% url 'integraRH:index' %}">
+                                <img class = "img" src = "{% static "integraRH/integra.jpeg" %}" alt ="" width="58%" height="88%">
+                            </a>
+                        </div>
+                        <div class="" id="">
+                        <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href = "www.cintegra.com.mx">
+                                        Inicio
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ref = "{% url 'integraRH:registroInicialTrabajador' %}">
+                                        Nuevo Trabajador
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" ref = "{% url 'integraRH:visualizadorTrabajador' %}">
+                                        Revisar Trabajador
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        
+
+            </nav>
+        
     </header>
 
     {% block body_block %}
     {% endblock %}
     
 
-    <!-- AQUI EMPIEAZN TODOS LOS SCRIPTS GLOBALES (QUE NO REQUIERAN CARGAR ANTES DE LA PAGINA) -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <!-- AQUI TERMINAN TODOS LOS SCRIPTS GLOBALES -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>    <!-- AQUI TERMINAN TODOS LOS SCRIPTS GLOBALES -->
 </body>
 </html>
