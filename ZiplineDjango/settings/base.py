@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'ShowIndicators',
     'StockDiary',
     'integraRH',
+    'import_export',
 ]
 
 MIDDLEWARE = [
