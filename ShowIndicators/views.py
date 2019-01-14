@@ -85,9 +85,10 @@ def callBestStrategy(request):
 def strategyCreator(request):
     if request.method == "POST":
         print('Creating strategies')
-        secs = Securities.objects.values('csv_file', 'security')
+        secs = Securities.objects.values('id','csv_file', 'security')
         for sec in secs:
-            strategies_utils.testStrategy(pd.read_csv('static/historicos/'+ sec['csv_file']), sec['security'], tries = int(request.POST['quantity']))
+            secObject = Securities.objects.get(id=sec['id'])
+            strategies_utils.createStrategy(pd.read_csv('static/historicos/'+ sec['csv_file']), secObject, tries = int(request.POST['quantity']))
         return JsonResponse({'succes':'true'})
     return render(request, 'show_indicators/strategy_creator.html')
 
@@ -119,3 +120,7 @@ def newSecurity(request):
     print("new_security")
     print(request.POST)
     return JsonResponse({"succes":True})
+
+def setBestStrategy(request):
+    strategies_utils.setBestStrategy()
+    return JsonResponse({'succes':True})

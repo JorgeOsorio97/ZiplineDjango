@@ -29,6 +29,7 @@ urlpatterns = [
     re_path(r'^add_security/$', views.addSecurity, name = 'addSecurity'),
     re_path(r'^new_security/$', views.newSecurity, name = 'newSecurity'),
     re_path(r'strategy_creator/$', views.strategyCreator, name = 'strategyCreator'),
+    re_path(r'set_best_strategy/$', views.setBestStrategy, name = 'setBestStrategy'),
     path('', views.index, name='index'),
 ]
 

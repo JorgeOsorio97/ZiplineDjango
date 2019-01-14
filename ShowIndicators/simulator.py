@@ -34,7 +34,8 @@ class Simulator:
 
     final_capital = 0
     indicators_names = []
-    operations_made = 0
+    buys_made = 0
+    sells_made = 0
     shares_own = 0
     highest_point = 0
     lowest_point = 0 
@@ -115,13 +116,13 @@ class Simulator:
                 if  self.security['FinalDecision'].iloc[i-1] == 'Buy':
                     pass
                 else:
-                    if self.operations_made == 0:
+                    if (self.buys_made + self.sells_made) == 0:
                         if first_purchase_method == 'init_capital':
                             self.shares_own = int((self.init_capital / self.security['Close'].iloc[i]))
-                            self.operations_made += 1
+                            self.buys_made += 1
                         elif first_purchase_method == 'std_purchase':
                             self.shares_own = self.std_purchase
-                            self.operations_made += 1   
+                            self.buys_made += 1   
                     else:
                         self.shares_own = int(self.final_capital/ self.security['Close'].iloc[i])
                         self.final_capital = self.  final_capital % self.security['Close'].iloc[i]
@@ -131,12 +132,12 @@ class Simulator:
                 if  self.security['FinalDecision'].iloc[i-1] == 'Sell':
                     pass
                 else:
-                    if self.operations_made == 0:
+                    if (self.buys_made + self.sells_made) == 0:
                         pass
                     else:
                         self.final_capital += self.shares_own * self.security['Close'].iloc[i]
                         self.shares_own = 0
-                        self.operations_made +=1    
+                        self.sells_made +=1    
             #Checar si es el momento mas alto o bajo de ganancias
             if self.shares_own == 0:
                 if self.highest_point == None or self.highest_point < self.final_capital:
@@ -154,7 +155,8 @@ class Simulator:
     def cleanSimulator(self):
         self.final_capital = 0
         self.indicators_names = []
-        self.operations_made = 0
+        self.buys_made = 0
+        self.sells_made = 0
         self.shares_own = 0
         self.highest_point = 0
         self.lowest_point = 0 
