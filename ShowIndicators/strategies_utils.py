@@ -62,7 +62,6 @@ def testStrategy(data, security, tries = 100):
     cols = ['Security','Strategy','Final_Capital','%Up']
     result = pd.DataFrame(result, columns=cols)
     
-# TODO: Cambiar a que busque la best strategy y agregue en su security
 def findBestStrategy(security):
     all_strategies = []
     for i in list(Strategies.objects.all().values().filter(security=security)): #pylint: disable = E1101
@@ -170,10 +169,8 @@ def createStrategy(data, security, tries = 20):
         print(iteration_result)
         result.append(iteration_result)
         strategy_append = Strategies(security = security, strategy = strategy, percentage_up= sim.diference_percentage, trades = sim.sells_made + sim.buys_made, max_point = sim.highest_point, min_point = sim.lowest_point )
-        print(strategy_append)
         strategy_append.save()
         result_append = Result(strategy = strategy_append, security = security, percentage_up = sim.diference_percentage, buy_trades = sim.buys_made, sell_trades = sim.sells_made, max_point = sim.highest_point, min_point = sim.lowest_point)
-        print(result_append)
         result_append.save()
         sim.cleanSimulator()
     
@@ -181,6 +178,6 @@ def setBestStrategy():
     secs = Securities.objects.all()
     for sec in secs:
         best = findBestStrategy(sec.security)
-        best = Strategies.objects.get(id = best['id'])
+        best = Strategies.objects.get(id =  best['id'])
         sec.best_strategy = best
         sec.save()

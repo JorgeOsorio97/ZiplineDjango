@@ -73,7 +73,7 @@ class Simulator:
 
     def add_indicator(self, name, decision = {}):
         if len(self.security['Close']) == len(decision['decision']) and len(self.security['Close']) == len(decision['data']):
-            print(name)
+            #print(name)
             self.security[name + "_decision"] = decision['decision']
             self.security[name + "_data"] = decision['data']
             self.indicators_names.append(name)

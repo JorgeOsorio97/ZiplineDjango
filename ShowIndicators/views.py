@@ -69,8 +69,6 @@ def callBestStrategy(request):
     print('callBestStrategy View')
     security = request.POST['security']
     security = securities_dict[security]
-    # for x in securities_dict: #for para crear estrategias
-    #        strategies_utils.testStrategy(pd.read_csv('static/show_indicators/historicos/'+securities_dict[x]+'.csv'),securities_dict[x], tries = 1)
     strategy = strategies_utils.findBestStrategy(security)
     strategy_temp = strategy.iloc[0]["Strategy"]
     for key, value in securities_dict.items():    # for name, age in list.items():  (for Python 3.x)
