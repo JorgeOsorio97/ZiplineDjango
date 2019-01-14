@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'import_export',
     'ShowIndicators',
     'StockDiary',
 ]
@@ -121,6 +122,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
