@@ -165,13 +165,11 @@ def createStrategy(data, security, tries = 20):
             strategy.update({'SAR':{'parameters':{'aceleration':acel, 'max_aceleration':maxacel}}})
         sim.calc_earning()
         strategy = json.dumps(strategy)
-        iteration_result =[security,strategy, sim.real_final_capital, sim.diference_percentage]
-        print(iteration_result)
-        result.append(iteration_result)
         strategy_append = Strategies(security = security, strategy = strategy, percentage_up= sim.diference_percentage, trades = sim.sells_made + sim.buys_made, max_point = sim.highest_point, min_point = sim.lowest_point )
         strategy_append.save()
         result_append = Result(strategy = strategy_append, security = security, percentage_up = sim.diference_percentage, buy_trades = sim.buys_made, sell_trades = sim.sells_made, max_point = sim.highest_point, min_point = sim.lowest_point)
         result_append.save()
+        print(result_append)
         sim.cleanSimulator()
     
 def setBestStrategy():
