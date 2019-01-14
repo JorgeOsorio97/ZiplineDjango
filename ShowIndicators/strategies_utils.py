@@ -7,6 +7,7 @@ import numpy as np
 import datetime as dt
 import json
 import os
+from django import db
 
 
 from ZiplineDjango.settings.base import STATIC_DIR
@@ -170,6 +171,7 @@ def createStrategy(data, security, tries = 20):
         result_append = Result(strategy = strategy_append, security = security, percentage_up = sim.diference_percentage, buy_trades = sim.buys_made, sell_trades = sim.sells_made, max_point = sim.highest_point, min_point = sim.lowest_point)
         result_append.save()
         print(result_append)
+        db.connections.close_all()
         sim.cleanSimulator()
     
 def setBestStrategy():
