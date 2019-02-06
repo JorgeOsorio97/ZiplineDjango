@@ -29,6 +29,8 @@ SECRET_KEY = '5^0vi8@-*1#$!wxla4f%t)86ctdhj)lejjav&x4qjvspb-epld'
 # SECURITY WARNING: don't run with debug turned on in production!   
 DEBUG = True
 
+ADMINS = [('Jorge', 'jorge.valdez.osorio@gmail.com')]
+
 ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -95,6 +97,7 @@ DATABASES = {
         'PASSWORD': 'ZiplinePostgres',
         'HOST': 'localhost',
         'PORT': '',
+        'CONN_MAX_AGE':5,
     }
 }
 
@@ -139,3 +142,32 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}

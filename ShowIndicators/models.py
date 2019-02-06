@@ -30,3 +30,14 @@ class Strategies(models.Model):
     
     def __str__(self):
         return str(self.id)
+
+class Result(models.Model):
+    id = models.AutoField(primary_key=True)
+    strategy = models.ForeignKey('Strategies', on_delete=models.CASCADE)
+    security = models.ForeignKey('Securities', on_delete=models.CASCADE)
+    percentage_up = models.FloatField()
+    buy_trades = models.PositiveIntegerField()
+    sell_trades = models.PositiveIntegerField()
+    max_point = models.FloatField()
+    min_point = models.FloatField()
+
