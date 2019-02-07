@@ -1,7 +1,17 @@
 from django.contrib import admin
-from ShowIndicators.models import Securities, Strategies, Result
+from import_export.admin import ImportExportModelAdmin
+from .models import Securities, Strategies, Result
+#from .models import Strategies
+#from ShowIndicators.models import Securities, Strategies
 
 # Register your models here.
-admin.site.register(Securities)
-admin.site.register(Strategies)
-admin.site.register(Result)
+@admin.register(Securities)
+@admin.register(Strategies)
+@admin.register(Result)
+class SecuritiesAdmin(ImportExportModelAdmin):
+    pass
+class StrategiesAdmin(ImportExportModelAdmin):
+    pass
+class ResultAdmin(ImportExportModelAdmin):
+    pass
+
