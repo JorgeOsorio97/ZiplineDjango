@@ -4,15 +4,13 @@ import numpy as np
 
 
 class Simulator:
-    #Constructor donde se toman los siguientes parametros:
 
-    ##security:s
+    #Constructor donde se toman los siguientes parametros:
+    ##security:
     ###Tipo Pandas.DataFrame debe tener OHLC 
-    
     ##init_capital:(opcional)
     ###Tipo entero, el capital inicial de la simulacion 
     ###Si no se declara sera igual a std_purchase * costo de la accion en el dia 0
-    
     ##std_purchase:(opcional)
     ###Acciones a comprar o vender cuando haya cambios
     ###Si no se declara es igual init_capital / costo de la accion en el dia 0
