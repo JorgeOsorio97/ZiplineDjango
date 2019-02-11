@@ -15,34 +15,9 @@
                 <div class="form-group">
             
                 <select class="form-control" id="security">
-                    <option value="aeromex">AEROMEX</option>
-                    <!--
-                    <option value="ahmsa">AHMSA</option>
-                   -->
-                    <option value="americaMovil">AmericaMovil</option>
-                    <option value="arcaContinental">ArcaContinental-AC</option>
-                    <option value="bachoco">BACHOCO</option>
-                    <option value="bancoSantander">BancoSANTANDER</option>
-                    <option value="bimbo">BIMBO</option>
-                    <option value="bmv">BMV</option>
-                    <option value="cablevision">Cablevision</option>
-                    <option value="casaSaba">Casa SABA</option>
-                    <option value="cemex">CEMEX</option>
-                    <option value="chedrahui">CHEDRAUI</option>
-                    <option value="cocacola">Coca-Cola</option>
-                    <option value="consorcioAra">Consorcio ARA</option>
-                    <option value="elektra">ELEKTRA</option>
-                    <option value="finamex">FINAMEX</option>
-                    <option value="firstMajesticSolveCorpFmsc">FirstMajesticSolverCorp-FMSC</option>
-                    <option value="gennomaLab">GENNOMA-LAB</option>
-                    <option value="gnp">GrupoNacionalProvincial-GNP</option>
-                    <option value="grupoSports">GrupoSports</option>
-                    <option value="liverpool">LIVERPOOL</option>
-                    <option value="radioCentro">RadioCENTRO</option>
-                    <option value="rotoplas">ROTOPLAS</option>
-                    <option value="soriana">SORIANA</option>
-                    <option value="televisa">TELEVISA</option>
-                    <option value="walmart">WAL-MART</option>
+                    {% for sec in secs %}
+                        <option value="{{ sec.id }}">{{ sec.name }}</option>
+                    {% endfor %}
                 </select>
             
                 <!--

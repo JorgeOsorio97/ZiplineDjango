@@ -64,11 +64,15 @@ def testStrategy(data, security, tries = 100):
     result = pd.DataFrame(result, columns=cols)
     
 def findBestStrategy(security):
+    print("findBestStrategy")
     all_strategies = []
-    for i in list(Strategies.objects.all().values().filter(security=security)): #pylint: disable = E1101
+    #print(security)
+    #print(list(Strategies.objects.all().values().filter(security=security.name + " - " + security.csv_file)))
+    for i in list(Strategies.objects.all().values().filter(security=security)): 
         all_strategies.append([i['id'], i['security'], i['strategy'], i['percentage_up'], i['last_modified'], i['max_point'],i['min_point'], i['trades']])
     #print(all_strategies[0])
     all_strategies = pd.DataFrame(all_strategies, columns = ['id','Security','Strategy','%Up','LastModified','MaxPoint', 'MinPoint', 'Trades'])
+    #print(all_strategies)
     #security_strategies = all_strategies[all_strategies['Security']==security]
     security_strategies = all_strategies
 
@@ -77,14 +81,17 @@ def findBestStrategy(security):
     return best_strategy
 
 def jsonStrategyToSim(strategy, data):
+    #print(strategy)
+    #print(data)
     strategy = json.loads(strategy)
+    #print(type(strategy))
     sim = Simulator(data, std_purchase = 10)
     for indicator , val in strategy.items():
         indicator_name = '{}'.format(indicator)
         for param , value in val['parameters'].items():
             indicator_name += '-{}'.format(value)
         sim.add_indicator(indicator_name, defineStrategyFunction(indicator_name, data))
-        sim.calcDecision()
+    sim.calcDecision()
     return sim
 
 def defineStrategyFunction(indicator_name, data):

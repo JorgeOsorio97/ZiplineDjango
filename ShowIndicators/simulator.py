@@ -14,7 +14,7 @@ class Simulator:
     ##std_purchase:(opcional)
     ###Acciones a comprar o vender cuando haya cambios
     ###Si no se declara es igual init_capital / costo de la accion en el dia 0
-    def __init__(self, security, init_capital = None, std_purchase = None):
+    def __init__(self, security, init_capital = None, std_purchase = None, export_results = False):
         self.security = security
 
         if init_capital is not None and std_purchase is not None:
@@ -27,6 +27,8 @@ class Simulator:
             self.init_capital = None
             self.std_purchase = std_purchase
         
+        if export_results:
+            self.export_results = True
         if len(self.indicators_names) is not 0:
             self.cleanSimulator()
 
@@ -45,6 +47,7 @@ class Simulator:
     init_date = ""
     end_date = ""
     last_decision = ""
+    export_results = False
 
     def check_first_purchase_method(self):
         if self.init_capital is not None and self.std_purchase is not None:

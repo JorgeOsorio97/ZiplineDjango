@@ -36,9 +36,10 @@ securities_dict = {'aeromex' : 'AEROMEX',
 # Create your views here.
 def index(request):
     print('index')
-    secs = Securities.objects.values('id', 'name', 'last_update')
-    #getData(request)
-    return render(request, 'show_indicators/index.html')
+    # TODO: Agragar dinamicamente los securities
+    secs = list(Securities.objects.values('id', 'name').order_by('name'))
+    #print(secs)
+    return render(request, 'show_indicators/index.html', {'secs': secs})
 
 @csrf_exempt
 def getData(request):
@@ -68,15 +69,14 @@ def pruebasPost(request):
 def callBestStrategy(request):
     print('callBestStrategy View')
     security = request.POST['security']
-    security = securities_dict[security]
+    security = Securities.objects.get(id = security)
     strategy = strategies_utils.findBestStrategy(security)
     strategy_temp = strategy.iloc[0]["Strategy"]
-    for key, value in securities_dict.items():    # for name, age in list.items():  (for Python 3.x)
-        if value == security:
-            symbol = key
-    symbol = pd.read_csv('static/historicos/'+securities_dict[symbol]+'.csv')
-    print(strategy)
+    #print(security.csv_file)
+    symbol = pd.read_csv('static/historicos/' + security.csv_file)
+    #print(strategy)
     sim = strategies_utils.jsonStrategyToSim(strategy_temp, symbol)
+    print(sim)
     return JsonResponse({'strategy': json.loads(strategy_temp), '%Up': strategy['%Up'].iloc[0], 'decision':sim.last_decision})
 
 @csrf_exempt
