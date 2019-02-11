@@ -12,7 +12,7 @@ from django.db import connection
 
 from ZiplineDjango.settings.base import STATIC_DIR
 
-
+#Deprecated
 def testStrategy(data, security, tries = 100):
     result = []
 
@@ -193,6 +193,7 @@ def createStrategy(data, security, tries = 20):
         result_append.save()
         print(result_append)
         sim.cleanSimulator()
+        del sim
     
 def setBestStrategy():
     secs = Securities.objects.all()
