@@ -1,5 +1,5 @@
-from ShowIndicators.indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision # pylint: disable=E0401
-from ShowIndicators.simulator import Simulator
+from ShowIndicators.simulator.indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision # pylint: disable=E0401
+from ShowIndicators.simulator.simulator import Simulator
 from ShowIndicators.models import Securities, Strategies, Result
 from ShowIndicators.get_info_wtd import get_all_data_wtd
 import pandas as pd

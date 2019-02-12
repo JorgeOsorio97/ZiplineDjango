@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-from . import simulator, indicators, strategies_utils, forms
-import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
-import json, csv
 from ShowIndicators.models import Securities
+from ShowIndicators.simulator import simulator, indicators, strategies_utils
+from ShowIndicators.forms import UploadFileForm
+import json, csv
+import pandas as pd
 from datetime import datetime
 
 # TODO: general de views corregir los csrf exempt agregando a cookies el csrf
@@ -76,7 +77,7 @@ def callBestStrategy(request):
     symbol = pd.read_csv('static/historicos/' + security.csv_file)
     #print(strategy)
     sim = strategies_utils.jsonStrategyToSim(strategy_temp, symbol)
-    print(sim.security.head(20))
+    print(sim.security.tail(20))
     return JsonResponse({'strategy': json.loads(strategy_temp), '%Up': strategy['%Up'].iloc[0], 'decision':sim.last_decision})
 
 @csrf_exempt
@@ -109,7 +110,7 @@ def addSecurity(request):
             temp.csv_file = row['csv_file']
             temp.save()
 
-    form = forms.UploadFileForm()
+    form = UploadFileForm()
     #print(form)
     return render(request, 'show_indicators/add_security.html', {'form': form})
  
