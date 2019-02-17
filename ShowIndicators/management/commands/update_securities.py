@@ -3,7 +3,7 @@ from ShowIndicators.models import Securities
 import pandas as pd
 import datetime as dt
 from ShowIndicators.get_info_wtd import get_today_data_wtd
-from ShowIndicators.strategies_utils import updateSecurity
+from ShowIndicators.simulator.strategies_utils import updateSecurity
 
 
 class Command(BaseCommand):
