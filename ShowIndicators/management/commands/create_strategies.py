@@ -25,6 +25,7 @@ class Command(BaseCommand):
         quantity = 10
         if(options['quantity']):
             quantity = options['quantity'][0]
+
         for sec in secs:
             secObject = Securities.objects.get(id = sec['id'])
             createStrategy(pd.read_csv('static/historicos/'+ sec['csv_file']), secObject, tries = quantity)

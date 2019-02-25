@@ -79,7 +79,7 @@ class Simulator:
             self.security[name + "_data"] = decision['data']
             self.indicators_names.append(name)
         else:
-            print('el tamaño de tu decision es incorrecto'.encode('utf-8'))
+            print('el tamano de tu decision es incorrecto'.encode('utf-8'))
 
     def calcDecision(self):
         final_decision = [] 
