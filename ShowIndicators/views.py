@@ -12,27 +12,27 @@ from datetime import datetime
 # TODO: general de views corregir los csrf exempt agregando a cookies el csrf
 
 securities_dict = {'aeromex' : 'AEROMEX',
-                    'americaMovil' : 'AMXA', 
-                    'arcaContinental' : 'AC',
-                    'bachoco' : 'BACHOCOB',
-                    #'bancoSantander' : 'SAN',  ## eliminado por falta de datos
-                    'bimbo' : 'BIMBO',
-                    'bmv' : 'BOLSAA', 
-                    'cablevision' : 'CABLECPO', 
-                    'cemex' : 'CEMEXCPO',
-                    'chedrahui' : 'CHDRAUIB', 
-                    'cocacola' : 'Coca-Cola', 
-                    'consorcioAra' : 'ARA', 
-                    'elektra' : 'ELEKTRA', 
-                    'finamex': 'FINAMEXO', 
-                    'gennomaLab' : 'Genomma-Lab', 
-                    'gnp' : 'GNP', 
-                    'grupoSports' : 'SPORTS', 
-                    'radioCentro' : 'RCENTROA', 
-                    'rotoplas' : 'AGUA', 
-                    'soriana' : 'SORIANAB', 
-                    'walmart' : 'WALMEX'
-                    }
+                   'americaMovil' : 'AMXA',
+                   'arcaContinental' : 'AC',
+                   'bachoco' : 'BACHOCOB',
+                   #'bancoSantander' : 'SAN',  ## eliminado por falta de datos
+                   'bimbo' : 'BIMBO',
+                   'bmv' : 'BOLSAA',
+                   'cablevision' : 'CABLECPO',
+                   'cemex' : 'CEMEXCPO',
+                   'chedrahui' : 'CHDRAUIB',
+                   'cocacola' : 'Coca-Cola',
+                   'consorcioAra' : 'ARA',
+                   'elektra' : 'ELEKTRA',
+                   'finamex': 'FINAMEXO',
+                   'gennomaLab' : 'Genomma-Lab',
+                   'gnp' : 'GNP',
+                   'grupoSports' : 'SPORTS',
+                   'radioCentro' : 'RCENTROA',
+                   'rotoplas' : 'AGUA',
+                   'soriana' : 'SORIANAB',
+                   'walmart' : 'WALMEX'
+                   }
 
 # Create your views here.
 def index(request):
