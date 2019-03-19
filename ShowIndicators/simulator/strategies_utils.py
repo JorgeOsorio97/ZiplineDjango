@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import numpy as np
 from django.db import connection
-from django.models import MAX
+from django.db.models import Max
 from ShowIndicators.simulator.indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision # pylint: disable=E0401
 from ShowIndicators.simulator.simulator import Simulator
 from ShowIndicators.models import Securities, Strategies, Result
@@ -34,7 +34,7 @@ def findBestStrategy(security):
     return best_strategy
 
 def find_best_strategy(security: Securities) -> Strategies:
-    max_percentage_up = Result.objects.filter(security = security).agreggate(MAX('percentage_up'))['percentage_up']
+    max_percentage_up = Result.objects.filter(security = security).agreggate(Max('percentage_up'))['percentage_up']
     return Result.objects.filter(percentage_up = max_percentage_up)
 
 def jsonStrategyToSim(strategy, data):
@@ -116,7 +116,7 @@ def createStrategy(data, security, tries = 20):
             days = np.random.randint(20, 100)
             sim.add_indicator('EMA-{}'.format(days), EMAdecision(data, days))
             strategy.update({'EMA':{'parameters':{'days':days}}})
-            #TODO crear funcion para agregar parametros automatico
+            #TODO: crear funcion para agregar parametros automatico
         if np.random.randint(0, 2)==1:
             days = np.random.randint(20, 100)
             sim.add_indicator('KAMA-{}'.format(days), KAMAdecision(data, days))
