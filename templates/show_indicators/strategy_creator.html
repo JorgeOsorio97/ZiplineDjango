@@ -14,7 +14,8 @@
                 {% csrf_token %}
                 <label for="security_name">Cantidad de Estrategias a generar por empresa:</label>
                 <input type="number" id="quantity" class="form-control"/>
-                
+                Día de inicio: <input type="date" id="star_date"> 
+                Fecha final: <input type="date" id="end_date"> 
                 <button type="button" class="btn btn-success " id="submit"> Estrategia Recomendada</button>
             </form>
             <div class="row">
