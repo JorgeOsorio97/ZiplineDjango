@@ -34,8 +34,8 @@ def findBestStrategy(security):
     return best_strategy
 
 def find_best_strategy(security: Securities) -> Strategies:
-    max_percentage_up = Result.objects.filter(security = security).agreggate(Max('percentage_up'))['percentage_up']
-    return Result.objects.filter(percentage_up = max_percentage_up)
+    max_percentage_up = Result.objects.filter(security=security).agreggate(Max('percentage_up'))['percentage_up']
+    return Result.objects.filter(percentage_up=max_percentage_up)
 
 def jsonStrategyToSim(strategy, data):
     #print(strategy)
@@ -112,32 +112,32 @@ def createStrategy(data, security, tries = 20):
         strategy = {}
         sim = Simulator(data, std_purchase= 10)
 
-        if np.random.randint(0, 2)==1:
+        if np.random.randint(0, 2) == 1:
             days = np.random.randint(20, 100)
             sim.add_indicator('EMA-{}'.format(days), EMAdecision(data, days))
             strategy.update({'EMA':{'parameters':{'days':days}}})
             #TODO: crear funcion para agregar parametros automatico
-        if np.random.randint(0, 2)==1:
+        if np.random.randint(0, 2) == 1:
             days = np.random.randint(20, 100)
             sim.add_indicator('KAMA-{}'.format(days), KAMAdecision(data, days))
             strategy.update({'KAMA':{'parameters':{'days':days}}})
-        if np.random.randint(0, 2)==1:
+        if np.random.randint(0, 2) == 1:
             days = np.random.randint(20, 100)
             sim.add_indicator('SMA-{}'.format(days), SMAdecision(data, days))
             strategy.update({'SMA':{'parameters':{'days':days}}})
-        if np.random.randint(0, 2)==1:
+        if np.random.randint(0, 2) == 1:
             days = np.random.randint(20, 100)
             sim.add_indicator('TEMA-{}'.format(days), TEMAdecision(data, days))
             strategy.update({'TEMA':{'parameters':{'days':days}}})
-        if np.random.randint(0, 2)==1:
+        if np.random.randint(0, 2) == 1:
             days = np.random.randint(20, 100)
             sim.add_indicator('TRIMA-{}'.format(days), TRIMAdecision(data, days))
             strategy.update({'TRIMA':{'parameters':{'days':days}}})
-        if np.random.randint(0, 2)==1:
+        if np.random.randint(0, 2) == 1:
             days = np.random.randint(20, 100)
             sim.add_indicator('WMA-{}'.format(days), WMAdecision(data, days))
             strategy.update({'WMA':{'parameters':{'days':days}}})
-        if np.random.randint(0, 2)==1:
+        if np.random.randint(0, 2) == 1:
             acel = np.random.randint(20, 100)/1000
             maxacel = np.random.randint(20, 100)/100
             sim.add_indicator('SAR-{}-{}'.format(acel, maxacel), SARdecision(data, aceleration = acel, max = maxacel))
@@ -147,12 +147,12 @@ def createStrategy(data, security, tries = 20):
         strategy_append = Strategies(security=security, strategy=strategy, percentage_up= sim.diference_percentage, trades = sim.sells_made + sim.buys_made, max_point = sim.highest_point, min_point = sim.lowest_point )
         strategy_append.save()
         result_append = Result(strategy=strategy_append,
-                                security=security,
-                                percentage_up=sim.diference_percentage,
-                                buy_trades=sim.buys_made,
-                                sell_trades=sim.sells_made,
-                                max_point=sim.highest_point,
-                                min_point=sim.lowest_point)
+                               security=security,
+                               percentage_up=sim.diference_percentage,
+                               buy_trades=sim.buys_made,
+                               sell_trades=sim.sells_made,
+                               max_point=sim.highest_point,
+                               min_point=sim.lowest_point)
         result_append.save()
         print(result_append)
         sim.cleanSimulator()

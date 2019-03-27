@@ -28,7 +28,7 @@ class Simulator:
     end_date = ""
     final_capital = 0
 
-    def __init__(self, security, init_capital=None, std_purchase=None, export_results=False):
+    def __init__(self, security, init_capital=None, stock_quantity=None, export_results=False):
         """
         Parameters:
         -----------
@@ -36,23 +36,23 @@ class Simulator:
             Datos tipo OHLC
         (init_capital):int, optional
             El capital inicial de la simulacion
-            Si no se declara sera igual a std_purchase * costo de la accion en el dia 0
-        (std_purchase): int, optional
+            Si no se declara sera igual a stock_quantity * costo de la accion en el dia 0
+        (stock_quantity): int, optional
             Acciones a comprar o vender cuando haya cambios
             Si no se declara es igual init_capital / costo de la accion en el dia 0
         """
 
         self.security = security
 
-        if init_capital is not None and std_purchase is not None:
+        if init_capital is not None and stock_quantity is not None:
             self.init_capital = init_capital
-            self.std_purchase = std_purchase
+            self.stock_quantity = stock_quantity
         elif init_capital is not None:
             self.init_capital = init_capital
-            self.std_purchase = None
-        elif std_purchase is not None:
+            self.stock_quantity = None
+        elif stock_quantity is not None:
             self.init_capital = None
-            self.std_purchase = std_purchase
+            self.stock_quantity = stock_quantity
         
         if export_results:
             self.export_results = True
@@ -60,19 +60,19 @@ class Simulator:
             self.cleanSimulator()
 
     def check_first_purchase_method(self):
-        if self.init_capital is not None and self.std_purchase is not None:
-            if self.security['Close'].iloc[0] * self.std_purchase < self.init_capital:
-                self.real_init_capital = self.security['Close'].iloc[0] * self.std_purchase
-                return "std_purchase"
+        if self.init_capital is not None and self.stock_quantity is not None:
+            if self.security['Close'].iloc[0] * self.stock_quantity < self.init_capital:
+                self.real_init_capital = self.security['Close'].iloc[0] * self.stock_quantity
+                return FirstTransactionType.STOCK_QUANTITY
             else:
                 self.real_init_capital = self.init_capital
-                return "init_capital"
+                return FirstTransactionType.INIT_CAPITAL
         elif self.init_capital is not None:
             self.real_init_capital = self.init_capital
-            return "init_capital"
-        elif self.std_purchase is not None:
-            self.real_init_capital = self.security['Close'].iloc[0] * self.std_purchase
-            return "std_purchase"
+            return FirstTransactionType.INIT_CAPITAL
+        elif self.stock_quantity is not None:
+            self.real_init_capital = self.security['Close'].iloc[0] * self.stock_quantity
+            return FirstTransactionType.STOCK_QUANTITY
 
     def calcRealFinalCapital(self):
         self.real_final_capital = (self.security['Close'].iloc[-1] * self.shares_own) + self.final_capital
@@ -92,6 +92,9 @@ class Simulator:
             print('el tamano de tu decision es incorrecto'.encode('utf-8'))
 
     def calcDecision(self):
+        """
+        Crear Columna con la decision diaria de acuerdo a la decision individual de los indicadores
+        """
         final_decision = []
         #print(self.security.columns.values)
         #print(self.indicators_names)
@@ -105,12 +108,12 @@ class Simulator:
             if not decision:
                 final_decision.append(None)
             else:
-                sell_count = len(decision[decision == "Sell"])
-                buy_count = len(decision[decision == "Buy"])
+                sell_count = len(decision[decision == TransactionType.SELL])
+                buy_count = len(decision[decision == TransactionType.BUY])
                 if sell_count > buy_count:
-                    final_decision.append('Sell')
+                    final_decision.append(TransactionType.SELL)
                 elif sell_count < buy_count:
-                    final_decision.append('Buy')
+                    final_decision.append(TransactionType.BUY)
                 elif sell_count == buy_count:
                     final_decision.append(final_decision[-1])
         self.security['FinalDecision'] = final_decision
@@ -118,29 +121,32 @@ class Simulator:
 
 
     def calc_earning(self):
+        """
+        Calcular las ganancias siguiendo la decision de compra durante todo el periodo de los datos
+        """
         self.calcDecision()
         first_purchase_method = self.check_first_purchase_method()
         for i in np.arange(len(self.security['Close'])):
             if self.security['FinalDecision'].iloc[i] is None:
                 pass
-            elif self.security['FinalDecision'].iloc[i] == 'Buy':
-                if  self.security['FinalDecision'].iloc[i-1] == 'Buy':
+            elif self.security['FinalDecision'].iloc[i] == TransactionType.BUY:
+                if  self.security['FinalDecision'].iloc[i-1] == TransactionType.BUY:
                     pass
                 else:
                     if (self.buys_made + self.sells_made) == 0:
-                        if first_purchase_method == 'init_capital':
+                        if first_purchase_method == FirstTransactionType.INIT_CAPITAL:
                             self.shares_own = int((self.init_capital/self.security['Close'].iloc[i]))
                             self.buys_made += 1
-                        elif first_purchase_method == 'std_purchase':
-                            self.shares_own = self.std_purchase
+                        elif first_purchase_method == FirstTransactionType.STOCK_QUANTITY:
+                            self.shares_own = self.stock_quantity
                             self.buys_made += 1
                     else:
                         self.shares_own = int(self.final_capital/ self.security['Close'].iloc[i])
                         self.final_capital = self.  final_capital % self.security['Close'].iloc[i]
                     #print(self.shares_own)
 
-            elif self.security['FinalDecision'].iloc[i] == 'Sell':
-                if  self.security['FinalDecision'].iloc[i-1] == 'Sell':
+            elif self.security['FinalDecision'].iloc[i] == TransactionType.SELL:
+                if  self.security['FinalDecision'].iloc[i-1] == TransactionType.SELL:
                     pass
                 else:
                     if (self.buys_made + self.sells_made) == 0:
@@ -170,11 +176,14 @@ class Simulator:
         self.calcDiferencePercentage()
 
     def cleanSimulator(self):
+        """
+        Funcion para reiniciar el simulador y no usar valores en memoria
+        """
         self.final_capital = 0
         self.indicators_names = []
         self.buys_made = 0
         self.sells_made = 0
-        self.shares_own = 0
+        self.shares_own = 0 
         self.highest_point = 0
         self.lowest_point = 0
         self.security_highest_point = 0
@@ -193,20 +202,18 @@ class Simulator:
         """
         return self.security['Date', 'Close', 'FinalDecision'][-days:]
 
-    #TODO: Convertir la decision a un ENUM
-    #TODO: Convertir el tipo de compra inicial en ENUM
 
-    class FirstTransactionType(Enum):
-        """
-        Enum que define como se hara la primer practica
-        """
-        STOCK_QUANTITY = auto()
-        INIT_CAPITAL = auto()
+class FirstTransactionType(Enum):
+    """
+    Enum que define como se hara la primer practica
+    """
+    STOCK_QUANTITY = auto()
+    INIT_CAPITAL = auto()
 
-    class TransactioType(Enum):
-        """
-        Enum para tipo de transaccion
-        """
-        BUY = auto()
-        SELL = auto()
+class TransactionType(Enum):
+    """
+    Enum para tipo de transaccion
+    """
+    BUY = auto()
+    SELL = auto()
         
