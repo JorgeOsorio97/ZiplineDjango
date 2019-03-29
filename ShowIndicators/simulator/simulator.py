@@ -120,39 +120,41 @@ class Simulator:
         self.last_decision = self.security['FinalDecision'].iloc[-1]
 
 
-    def calc_earning(self):
+    def calc_earning(self, data = None):
         """
         Calcular las ganancias siguiendo la decision de compra durante todo el periodo de los datos
         """
+        if data is None:
+            data = self.security
         self.calcDecision()
         first_purchase_method = self.check_first_purchase_method()
-        for i in np.arange(len(self.security['Close'])):
-            if self.security['FinalDecision'].iloc[i] is None:
+        for i in np.arange(len(data['Close'])):
+            if data['FinalDecision'].iloc[i] is None:
                 pass
-            elif self.security['FinalDecision'].iloc[i] == TransactionType.BUY:
-                if  self.security['FinalDecision'].iloc[i-1] == TransactionType.BUY:
+            elif data['FinalDecision'].iloc[i] == TransactionType.BUY:
+                if  data['FinalDecision'].iloc[i-1] == TransactionType.BUY:
                     pass
                 else:
                     if (self.buys_made + self.sells_made) == 0:
                         if first_purchase_method == FirstTransactionType.INIT_CAPITAL:
-                            self.shares_own = int((self.init_capital/self.security['Close'].iloc[i]))
+                            self.shares_own = int((self.init_capital/data['Close'].iloc[i]))
                             self.buys_made += 1
                         elif first_purchase_method == FirstTransactionType.STOCK_QUANTITY:
                             self.shares_own = self.stock_quantity
                             self.buys_made += 1
                     else:
-                        self.shares_own = int(self.final_capital/ self.security['Close'].iloc[i])
-                        self.final_capital = self.  final_capital % self.security['Close'].iloc[i]
+                        self.shares_own = int(self.final_capital/ data['Close'].iloc[i])
+                        self.final_capital = self.  final_capital % data['Close'].iloc[i]
                     #print(self.shares_own)
 
-            elif self.security['FinalDecision'].iloc[i] == TransactionType.SELL:
-                if  self.security['FinalDecision'].iloc[i-1] == TransactionType.SELL:
+            elif data['FinalDecision'].iloc[i] == TransactionType.SELL:
+                if  data['FinalDecision'].iloc[i-1] == TransactionType.SELL:
                     pass
                 else:
                     if (self.buys_made + self.sells_made) == 0:
                         pass
                     else:
-                        self.final_capital += self.shares_own * self.security['Close'].iloc[i]
+                        self.final_capital += self.shares_own * data['Close'].iloc[i]
                         self.shares_own = 0
                         self.sells_made +=1
             #Checar si es el momento mas alto o bajo de ganancias
@@ -166,10 +168,10 @@ class Simulator:
                     self.lowest_point = self.final_capital
             else:
                 if (self.highest_point is None
-                        or self.highest_point < (self.shares_own * self.security['Close'].iloc[i])):
+                        or self.highest_point < (self.shares_own * data['Close'].iloc[i])):
                     self.highest_point = self.final_capital
                 if (self.lowest_point is None
-                        or self.lowest_point > (self.shares_own * self.security['Close'].iloc[i])
+                        or self.lowest_point > (self.shares_own * data['Close'].iloc[i])
                         or self.lowest_point == 0):
                     self.lowest_point = self.final_capital
         self.calcRealFinalCapital()
@@ -201,6 +203,14 @@ class Simulator:
         Function to test last n days of strategy allready trained
         """
         return self.security['Date', 'Close', 'FinalDecision'][-days:]
+
+    def test_last_days(self, days, transactionType, transactionQuantity):
+        """
+        Test the las n days according to its decisions
+        """
+        data = self.last_days_results(days)
+        for i in np.arange(len(data['Close'])):
+            pass
 
 
 class FirstTransactionType(Enum):

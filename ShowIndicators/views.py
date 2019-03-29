@@ -75,7 +75,7 @@ def callBestStrategy(request):
     strategy_temp = strategy.iloc[0]["Strategy"]
     #print(security.csv_file)
     symbol = pd.read_csv('static/historicos/' + security.csv_file)
-    #print(strategy)
+    print(strategy_temp)
     sim = strategies_utils.jsonStrategyToSim(strategy_temp, symbol)
     print(sim.security.tail(20))
     return JsonResponse({'strategy': json.loads(strategy_temp), '%Up': strategy['%Up'].iloc[0], 'decision':sim.last_decision})

@@ -1,22 +1,20 @@
-import datetime as dt
 import json
 import os
 import pandas as pd
 import numpy as np
 from django.db import connection
 from django.db.models import Max
-from ShowIndicators.simulator.indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision # pylint: disable=E0401
+from ShowIndicators.simulator.indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision
 from ShowIndicators.simulator.simulator import Simulator
 from ShowIndicators.models import Securities, Strategies, Result
 from ShowIndicators.get_info_wtd import get_all_data_wtd
 from ZiplineDjango.settings.base import STATIC_DIR
 
- 
+
 def findBestStrategy(security):
     print("findBestStrategy")
     all_strategies = []
     #print(security)
-    #print(list(Strategies.objects.all().values().filter(security=security.name + " - " + security.csv_file)))
     for i in list(Strategies.objects.all().values().filter(security=security)): 
         all_strategies.append([i['id'], i['security'],
                                i['strategy'], i['percentage_up'],
@@ -42,13 +40,14 @@ def jsonStrategyToSim(strategy, data):
     #print(data)
     strategy = json.loads(strategy)
     #print(type(strategy))
-    sim = Simulator(data, std_purchase = 10)
+    sim = Simulator(data, stock_quantity=10)
     for indicator, val in strategy.items():
         indicator_name = '{}'.format(indicator)
         for param, value in val['parameters'].items():
             indicator_name += '-{}'.format(value)
         sim.add_indicator(indicator_name, defineStrategyFunction(indicator_name, data))
     sim.calcDecision()
+    print(sim)
     return sim
 
 def defineStrategyFunction(indicator_name, data):
@@ -97,20 +96,20 @@ def createStrategy(data, security, tries = 20):
     for i in range(tries): # pylint: disable=W0612
         if connection.connection is not None:
             connection.close()
-        while True:
-            try:
-                connection.ensure_connection()
-            except Exception:
-                log.err(_why=(
-                    "Error starting: "
-                    "Connection to database cannot be established."))
-                time.sleep(1)
-            else:
-                # Connection made, now close it.
-                connection.close()
-                break 
+            while True:
+                try:
+                    connection.ensure_connection()
+                except Exception:
+                    log.err(_why=(
+                        "Error starting: "
+                        "Connection to database cannot be established."))
+                    time.sleep(1)
+        else:
+            # Connection made, now close it.
+            connection.close()
+            break
         strategy = {}
-        sim = Simulator(data, std_purchase= 10)
+        sim = Simulator(data, stock_quantity= 10)
 
         if np.random.randint(0, 2) == 1:
             days = np.random.randint(20, 100)

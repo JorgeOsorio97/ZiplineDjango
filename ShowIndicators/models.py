@@ -15,7 +15,7 @@ class Securities(models.Model):
 
     def __str__(self):
         return self.name + " - " + self.security
-        
+
 class Strategies(models.Model):
     id = models.AutoField(primary_key = True)
     security = models.CharField(max_length = 50)
@@ -40,4 +40,3 @@ class Result(models.Model):
     sell_trades = models.PositiveIntegerField()
     max_point = models.FloatField()
     min_point = models.FloatField()
-
