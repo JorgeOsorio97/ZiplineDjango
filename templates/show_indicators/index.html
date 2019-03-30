@@ -59,14 +59,26 @@
                 </div>
             </form>
         </div>
-    
+        <div class="container">
+                <div class="jumbotron">
+                    <h1 class="display-4">Simulación personalizada</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            Día de inicio: <input type="date" id="star_date" class="form-control"> 
+                            Fecha final: <input type="date" id="end_date" class="form-control"> 
+                            CAntidad de acciones/inversión: <input type="number" id="quantity" class="form-control"/>
+                        <button type="button" class="btn btn-success " id="bestStrategy"> Simulación</button>
+                        </div>
+                    </form>
+                </div>
         <div id="myDiv" style="width:600; height:800"></div> 
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                <div class="admin-content analysis-progrebar-ctn res-mg-t-15">
-                    <h4>Decisión</h4>
-                    <h3 id="decision"></h3>
-                </div>
+                    <div class="admin-content analysis-progrebar-ctn res-mg-t-15">
+                        <h4>Decisión</h4>
+                        <h3 id="decision"></h3>
+                    </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 breadcomb-ctn">
