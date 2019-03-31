@@ -209,8 +209,7 @@ class Simulator:
         Test the las n days according to its decisions
         """
         data = self.last_days_results(days)
-        for i in np.arange(len(data['Close'])):
-            pass
+        
 
 
 class FirstTransactionType(Enum):

@@ -25,11 +25,12 @@ urlpatterns = [
     re_path(r'^pruebaPOST/$',views.pruebasPost, name='pruebaPost'),
     re_path(r'^get-data/$', views.getData, name='get-data'),
     re_path(r'^result/$', views.result, name='result'),
-    re_path(r'^bestStrategy/$', views.callBestStrategy, name = 'bestStrategy'),
-    re_path(r'^add_security/$', views.addSecurity, name = 'addSecurity'),
-    re_path(r'^new_security/$', views.newSecurity, name = 'newSecurity'),
-    re_path(r'strategy_creator/$', views.strategyCreator, name = 'strategyCreator'),
-    re_path(r'set_best_strategy/$', views.setBestStrategy, name = 'setBestStrategy'),
+    re_path(r'^bestStrategy/$', views.callBestStrategy, name='bestStrategy'),
+    re_path(r'^add_security/$', views.addSecurity, name='addSecurity'),
+    re_path(r'^new_security/$', views.newSecurity, name='newSecurity'),
+    re_path(r'strategy_creator/$', views.strategyCreator, name='strategyCreator'),
+    re_path(r'set_best_strategy/$', views.setBestStrategy, name='setBestStrategy'),
+    re_path(r'get_personalized_result', views.get_personalized_result, name="get_personalized_result"),
     path('', views.index, name='index'),
 ]
 

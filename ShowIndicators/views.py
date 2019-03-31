@@ -123,3 +123,16 @@ def newSecurity(request):
 def setBestStrategy(request):
     strategies_utils.setBestStrategy()
     return JsonResponse({'succes':True})
+
+
+@csrf_exempt
+def get_personalized_result(request):
+    print("get_personalized_result")
+    print(request.POST)
+    init_date = request.POST['init_date']
+    end_date = request.POST['end_date']
+    security = request.POST['security']
+    quantity = request.POST['quantity']
+    security = Securities.objects.get(id ="security")
+    data = pd.read_csv(strategies_utils.get_csv_path(security))
+    print(data)

@@ -96,14 +96,13 @@ def createStrategy(data, security, tries = 20):
     for i in range(tries): # pylint: disable=W0612
         if connection.connection is not None:
             connection.close()
-            while True:
-                try:
-                    connection.ensure_connection()
-                except Exception:
-                    log.err(_why=(
-                        "Error starting: "
-                        "Connection to database cannot be established."))
-                    time.sleep(1)
+            try:
+                connection.ensure_connection()
+            except Exception:
+                log.err(_why=(
+                    "Error starting: "
+                    "Connection to database cannot be established."))
+                time.sleep(1)
         else:
             # Connection made, now close it.
             connection.close()
@@ -164,3 +163,6 @@ def setBestStrategy():
         best = Strategies.objects.get(id = best['id'])
         sec.best_strategy = best
         sec.save()
+
+def get_csv_path(security : Securities) -> String:
+    return 'static/historicos/'+ security.csv_file
