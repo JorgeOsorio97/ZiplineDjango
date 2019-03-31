@@ -1,7 +1,7 @@
 $('#submit').click( function (){
     
     $.ajax({
-        url: '/show_indicators/index/',
+        url: '/show_indicators/get_personalized_result/',
         type : "post",
         dataType : "json",
         data : {
