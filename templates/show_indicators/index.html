@@ -53,7 +53,7 @@
                     </div>
                 
     
-                <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+                <bu fromtton class="btn btn-primary btn-lg" id="enviar">Enviar</button>
                 -->
                 <button type="button" class="btn btn-success " id="bestStrategy"> Estrategia Recomendada</button>
                 </div>
@@ -65,10 +65,21 @@
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-group">
-                            Día de inicio: <input type="date" id="star_date" class="form-control"> 
+                            Día de inicio: <input type="date" id="init_date" class="form-control"> 
                             Fecha final: <input type="date" id="end_date" class="form-control"> 
-                            CAntidad de acciones/inversión: <input type="number" id="quantity" class="form-control"/>
-                        <button type="button" class="btn btn-success " id="bestStrategy"> Simulación</button>
+                            Cantidad de acciones/inversión: <input type="number" id="quantity" class="form-control"/>
+                            Tipo de compra: <select name="strategy" id="selectStrategy">    
+                                <option value="actions">Acciones</option>
+                                <option value="money">Dinero</option>    
+                            </select>
+                            <br>
+                            <select class="form-control" id="security">
+                                {% for sec in secs %}
+                                    <option value="{{ sec.id }}">{{ sec.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                        <button type="button" class="btn btn-success " id="customStrategy"> Simulación</button>
                         </div>
                     </form>
                 </div>
