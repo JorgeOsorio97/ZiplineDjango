@@ -53,20 +53,43 @@
                     </div>
                 
     
-                <button class="btn btn-primary btn-lg" id="enviar">Enviar</button>
+                <bu fromtton class="btn btn-primary btn-lg" id="enviar">Enviar</button>
                 -->
                 <button type="button" class="btn btn-success " id="bestStrategy"> Estrategia Recomendada</button>
                 </div>
             </form>
         </div>
-    
+        <div class="container">
+                <div class="jumbotron">
+                    <h1 class="display-4">Simulación personalizada</h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            Día de inicio: <input type="date" id="init_date" class="form-control"> 
+                            Fecha final: <input type="date" id="end_date" class="form-control"> 
+                            Cantidad de acciones/inversión: <input type="number" id="quantity" class="form-control"/>
+                            Tipo de compra: <select name="strategy" id="selectStrategy">    
+                                <option value="actions">Acciones</option>
+                                <option value="money">Dinero</option>    
+                            </select>
+                            <br>
+                            <select class="form-control" id="security">
+                                {% for sec in secs %}
+                                    <option value="{{ sec.id }}">{{ sec.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                        <button type="button" class="btn btn-success " id="customStrategy"> Simulación</button>
+                        </div>
+                    </form>
+                </div>
         <div id="myDiv" style="width:600; height:800"></div> 
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                <div class="admin-content analysis-progrebar-ctn res-mg-t-15">
-                    <h4>Decisión</h4>
-                    <h3 id="decision"></h3>
-                </div>
+                    <div class="admin-content analysis-progrebar-ctn res-mg-t-15">
+                        <h4>Decisión</h4>
+                        <h3 id="decision"></h3>
+                    </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="admin-content analysis-progrebar-ctn res-mg-t-15 breadcomb-ctn">
