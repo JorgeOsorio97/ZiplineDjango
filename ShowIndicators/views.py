@@ -2,12 +2,15 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import csrf_exempt
+from ShowIndicators import strategies_utils
 from ShowIndicators.models import Securities
-from ShowIndicators.simulator import simulator, indicators, strategies_utils
+from ShowIndicators.simulator import simulator, indicators, Utils
 from ShowIndicators.forms import UploadFileForm
 import json, csv
+import numpy as np
 import pandas as pd
-from datetime import datetime
+from datetime import datetime as dt
+import pdb;
 
 # TODO: general de views corregir los csrf exempt agregando a cookies el csrf
 
@@ -47,13 +50,13 @@ def getData(request):
     req_url = request.POST['security'] 
     indicators_req = dict(request.POST.lists())['indicators[]']
     symbol = pd.read_csv('static/show_indicators/historicos/'+securities_dict[req_url]+'.csv')
-    sim  = simulator.Simulator(symbol,std_purchase = 20)
+    sim  = simulator.Simulator(symbol,Utils.FirstTransactionType.STOCK_QUANTITY, 20)
     # TODO: hacer que se agreguen dinamicamente los indicadores
     sim.add_indicator('SMA-50',indicators.SMAdecision(symbol,50))
     sim.add_indicator('SMA-20',indicators.SMAdecision(symbol,20))
     sim.security.to_csv('ShowIndicators/result.csv', index = False)
-    fileUrl = 'result.csv'
-    return JsonResponse({'URL' : fileUrl, 'indicators':[]})   
+    file_url = 'result.csv'
+    return JsonResponse({'URL' : file_url, 'indicators':[]})   
 
 def result(request):
     with open('ShowIndicators/result.csv', 'rb') as myfile:
@@ -74,9 +77,9 @@ def callBestStrategy(request):
     strategy = strategies_utils.findBestStrategy(security)
     strategy_temp = strategy.iloc[0]["Strategy"]
     #print(security.csv_file)
-    symbol = pd.read_csv('static/historicos/' + security.csv_file)
+    symbol = strategies_utils.get_csv_data(security.csv_file)
     print(strategy_temp)
-    sim = strategies_utils.jsonStrategyToSim(strategy_temp, symbol)
+    sim = strategies_utils.jsonStrategyToSim(strategy_temp, symbol, Utils.FirstTransactionType.STOCK_QUANTITY, 20)
     print(sim.security.tail(20))
     return JsonResponse({'strategy': json.loads(strategy_temp), '%Up': strategy['%Up'].iloc[0], 'decision':sim.last_decision})
 
@@ -113,26 +116,33 @@ def addSecurity(request):
     form = UploadFileForm()
     #print(form)
     return render(request, 'show_indicators/add_security.html', {'form': form})
- 
+
 @csrf_exempt
 def newSecurity(request):
     print("new_security")
     print(request.POST)
-    return JsonResponse({"succes":True})
+    return JsonResponse({"success":True})
 
 def setBestStrategy(request):
     strategies_utils.setBestStrategy()
-    return JsonResponse({'succes':True})
+    return JsonResponse({'success':True})
 
 
 @csrf_exempt
 def get_personalized_result(request):
     print("get_personalized_result")
-    print(request.POST)
-    init_date = request.POST['init_date']
-    end_date = request.POST['end_date']
-    security = request.POST['security']
+    #print(request.POST)
+    init_date = dt.strptime(request.POST['init_date'], "%Y-%m-%d")
+    end_date = dt.strptime(request.POST['end_date'], "%Y-%m-%d")
+    security = Securities.objects.get(id=int(request.POST['security']))
     quantity = request.POST['quantity']
-    security = Securities.objects.get(id ="security")
-    data = pd.read_csv(strategies_utils.get_csv_path(security))
-    print(data)
+    data = strategies_utils.get_csv_data(security)
+    json_string = strategies_utils.find_best_strategy(security)
+    sim = strategies_utils.jsonStrategyToSim(json_string,
+                                             data,
+                                             Utils.FirstTransactionType.STOCK_QUANTITY,
+                                             quantity)
+    sim.calcDecision()
+    sim.test_date_interval(init_date, end_date)
+    #pdb.set_trace()
+    return JsonResponse({'success':True, 'earnings':sim.final_capital})

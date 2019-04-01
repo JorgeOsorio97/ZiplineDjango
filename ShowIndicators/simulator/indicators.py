@@ -1,35 +1,35 @@
 import pandas as pd
 import numpy as np
-from talib import EMA, KAMA, SAR, SMA, TEMA, TRIMA, WMA # pylint: disable=E0611
+from talib import EMA, KAMA, SAR, SMA, TEMA, TRIMA, WMA
+from ShowIndicators.simulator.Utils import TransactionType
 
-def EMAdecision(table, days = 20):   
+def EMAdecision(table, days=20):
     decision = []
-    close =table['Close']
+    close = table['Close']
     del table
-    data = EMA(np.array(close),days)
-
+    data = EMA(np.array(close), days)
     for i in np.arange(len(close)):     
         if np.isnan(data[i]):
             decision.append(None)
         if data[i] > close[i]:
-            decision.append('Sell') 
+            decision.append(TransactionType.SELL)
         if data[i] < close[i]:
-            decision.append('Buy')  
-    return {'decision' :decision, 'data': data}
+            decision.append(TransactionType.BUY)
+    return {'decision' : decision, 'data': data}
 
-def KAMAdecision(table, days = 20):   
+def KAMAdecision(table, days=20):
     decision = []
-    close =table['Close']
+    close = table['Close']
     del table
-    data = KAMA(np.array(close),days)
+    data = KAMA(np.array(close), days)
 
-    for i in np.arange(len(close)):     
+    for i in np.arange(len(close)):
         if np.isnan(data[i]):
             decision.append(None)
         if data[i] > close[i]:
-            decision.append('Sell') 
+            decision.append(TransactionType.SELL) 
         if data[i] < close[i]:
-            decision.append('Buy')  
+            decision.append(TransactionType.BUY)  
     return {'decision' :decision, 'data': data}
 
 def SARdecision(table, aceleration = 0.02, max = 0.2):   
@@ -45,9 +45,9 @@ def SARdecision(table, aceleration = 0.02, max = 0.2):
         if np.isnan(data[i]):
             decision.append(None)
         elif data[i] >= low[i]:
-            decision.append('Buy') 
+            decision.append(TransactionType.BUY)
         elif data[i] <= high[i]:
-            decision.append('Sell')
+            decision.append(TransactionType.SELL)
         else:
             decision.append(decision[-1])  
 
@@ -64,9 +64,9 @@ def SMAdecision(table, days = 20):
         if np.isnan(data[i]):
             decision.append(None)
         if data[i] > close[i]:
-            decision.append('Sell') 
+            decision.append(TransactionType.SELL) 
         if data[i] < close[i]:
-            decision.append('Buy')  
+            decision.append(TransactionType.BUY)  
     return {'decision' :decision, 'data': data}
 
 def TEMAdecision(table, days = 20):   
@@ -79,9 +79,9 @@ def TEMAdecision(table, days = 20):
         if np.isnan(data[i]):
             decision.append(None)
         if data[i] > close[i]:
-            decision.append('Sell') 
+            decision.append(TransactionType.SELL) 
         if data[i] < close[i]:
-            decision.append('Buy')  
+            decision.append(TransactionType.BUY)  
     return {'decision' :decision, 'data': data}
 
 def TRIMAdecision(table, days = 20):   
@@ -94,9 +94,9 @@ def TRIMAdecision(table, days = 20):
         if np.isnan(data[i]):
             decision.append(None)
         if data[i] > close[i]:
-            decision.append('Sell') 
+            decision.append(TransactionType.SELL) 
         if data[i] < close[i]:
-            decision.append('Buy')  
+            decision.append(TransactionType.BUY)  
     return {'decision' :decision, 'data': data}
 
 def WMAdecision(table, days = 20):   
@@ -109,9 +109,9 @@ def WMAdecision(table, days = 20):
         if np.isnan(data[i]):
             decision.append(None)
         if data[i] > close[i]:
-            decision.append('Sell') 
+            decision.append(TransactionType.SELL) 
         if data[i] < close[i]:
-            decision.append('Buy')  
+            decision.append(TransactionType.BUY)  
     return {'decision' :decision, 'data': data}
 
 

@@ -1,13 +1,13 @@
-$('#submit').click( function (){
+$('#customStrategy').click( function (){
     
     $.ajax({
         url: '/show_indicators/get_personalized_result/',
         type : "post",
         dataType : "json",
         data : {
-            start_date : $("#init_date").val(),
+            init_date : $("#init_date").val(),
             end_date : $("#end_date").val(),
-            amount : $("#amount").val(),
+            quantity : $("#quantity").val(),
             security : $("#security").val(),
             strategy_type : $("#selectStrategy").val(),
         }   

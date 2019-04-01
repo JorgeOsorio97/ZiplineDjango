@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from django.db import connection
 from django.db.models import Max
+from ShowIndicators.simulator.Utils import FirstTransactionType, TransactionType
 from ShowIndicators.simulator.indicators import EMAdecision, SARdecision, KAMAdecision, SMAdecision, TEMAdecision, TRIMAdecision, WMAdecision
 from ShowIndicators.simulator.simulator import Simulator
 from ShowIndicators.models import Securities, Strategies, Result
@@ -32,22 +33,21 @@ def findBestStrategy(security):
     return best_strategy
 
 def find_best_strategy(security: Securities) -> Strategies:
-    max_percentage_up = Result.objects.filter(security=security).agreggate(Max('percentage_up'))['percentage_up']
-    return Result.objects.filter(percentage_up=max_percentage_up)
+    max_percentage_up = Result.objects.filter(security=security).aggregate(Max('percentage_up'))['percentage_up__max']
+    return Result.objects.filter(percentage_up__gte=max_percentage_up-0.0001)[0].strategy.strategy
 
-def jsonStrategyToSim(strategy, data):
-    #print(strategy)
-    #print(data)
+def jsonStrategyToSim(strategy, data, firstTransactionType, quantity):
     strategy = json.loads(strategy)
-    #print(type(strategy))
-    sim = Simulator(data, stock_quantity=10)
+    if firstTransactionType == FirstTransactionType.INIT_CAPITAL:
+        sim = Simulator(data, FirstTransactionType.INIT_CAPITAL,quantity)
+    elif firstTransactionType == FirstTransactionType.STOCK_QUANTITY:
+        sim = Simulator(data, FirstTransactionType.STOCK_QUANTITY, quantity)
     for indicator, val in strategy.items():
         indicator_name = '{}'.format(indicator)
         for param, value in val['parameters'].items():
             indicator_name += '-{}'.format(value)
         sim.add_indicator(indicator_name, defineStrategyFunction(indicator_name, data))
     sim.calcDecision()
-    print(sim)
     return sim
 
 def defineStrategyFunction(indicator_name, data):
@@ -108,7 +108,7 @@ def createStrategy(data, security, tries = 20):
             connection.close()
             break
         strategy = {}
-        sim = Simulator(data, stock_quantity= 10)
+        sim = Simulator(data, FirstTransactionType.STOCK_QUANTITY, 10)
 
         if np.random.randint(0, 2) == 1:
             days = np.random.randint(20, 100)
@@ -164,5 +164,8 @@ def setBestStrategy():
         sec.best_strategy = best
         sec.save()
 
-def get_csv_path(security : Securities) -> String:
-    return 'static/historicos/'+ security.csv_file
+def get_csv_data(security : Securities) -> pd.DataFrame:
+    df = pd.read_csv('static/historicos/'+ security.csv_file)
+    df['Date'] = pd.to_datetime(df['Date'])
+    return df
+
